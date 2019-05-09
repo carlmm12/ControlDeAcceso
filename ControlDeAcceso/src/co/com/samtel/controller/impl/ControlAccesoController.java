@@ -42,7 +42,7 @@ public class ControlAccesoController implements IControlAccessoController {
 	 * este metodo registrara la entidad de control Acceso
 	 */
 	@Override
-	public void Create(ControlAcceso entity) {
+	public void create(ControlAcceso entity) {
 		try {
 			getControlAccesoService().save(entity);
 			// System.out.println("Registro la entidad");
@@ -77,7 +77,7 @@ public class ControlAccesoController implements IControlAccessoController {
 				ControlAcceso cAcceso = new ControlAcceso(new ControlAccesoPK(new Timestamp(date.getTime()), Integer.parseInt(line[1])),
 						Integer.parseInt(line[3]), Integer.parseInt(line[4]), line[2], Integer.parseInt(line[0]));
 				// System.out.println(cAcceso.toString() + cAcceso.getId().toString());
-				Create(cAcceso);
+				create(cAcceso);
 				// System.out.println(line[0] + line[1] + line[2] + line[3] + line[4] +
 				// line[5]);
 			}

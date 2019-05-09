@@ -7,6 +7,6 @@ public interface IControlAccessoController {
 	
 	IServiceControlAcceso getControlAccesoService();
     Boolean CSVReader();
-    void Create(ControlAcceso entity);
+    void create(ControlAcceso entity);
 
 }

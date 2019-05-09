@@ -14,4 +14,5 @@ public interface IServiceRepo<T> {
 	long count();
 	public void deleteById(Integer id); 
 	void delete(T entity);
+	
 }
