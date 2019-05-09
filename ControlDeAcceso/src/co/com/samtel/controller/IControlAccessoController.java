@@ -1,7 +1,7 @@
 package co.com.samtel.controller;
 
 import co.com.samtel.entities.ControlAcceso;
-import co.com.samtel.repository.impl.IServiceControlAcceso;
+import co.com.samtel.service.IServiceControlAcceso;
 
 public interface IControlAccessoController {
 	

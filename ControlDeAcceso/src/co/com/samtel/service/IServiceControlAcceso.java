@@ -1,4 +1,4 @@
-package co.com.samtel.repository.impl;
+package co.com.samtel.service;
 
 import co.com.samtel.entities.ControlAcceso;
 

@@ -1,4 +1,4 @@
-package co.com.samtel.repository.impl;
+package co.com.samtel.service.impl;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import co.com.samtel.entities.ControlAcceso;
 import co.com.samtel.repository.IControlAcceso;
+import co.com.samtel.service.IServiceControlAcceso;
 
 @Service("ControlAccesoBean")
 public class ControlAccesoImpl implements IServiceControlAcceso {

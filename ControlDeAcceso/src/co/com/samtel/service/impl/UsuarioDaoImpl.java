@@ -1,4 +1,4 @@
-package co.com.samtel.repository.impl;
+package co.com.samtel.service.impl;
 
 import java.util.List;
 
@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import co.com.samtel.entities.Usuario;
 
 import co.com.samtel.repository.IUsuarioDao;
+import co.com.samtel.service.IServiceUsuario;
 
 @Service("UsuarioBean")
 public class UsuarioDaoImpl implements IServiceUsuario {

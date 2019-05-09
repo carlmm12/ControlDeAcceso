@@ -17,8 +17,8 @@ import co.com.samtel.controller.IControlAccessoController;
 import co.com.samtel.entities.ControlAcceso;
 import co.com.samtel.entities.ControlAccesoPK;
 import co.com.samtel.entities.Usuario;
-import co.com.samtel.repository.impl.IServiceControlAcceso;
-import co.com.samtel.repository.impl.IServiceUsuario;
+import co.com.samtel.service.IServiceControlAcceso;
+import co.com.samtel.service.IServiceUsuario;
 import co.com.samtel.util.BeanUtil;
 
 @Controller

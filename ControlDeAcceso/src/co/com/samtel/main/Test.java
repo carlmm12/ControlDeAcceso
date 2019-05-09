@@ -9,7 +9,7 @@ import co.com.samtel.controller.IUserController;
 import co.com.samtel.controller.impl.ControlAccesoController;
 import co.com.samtel.controller.impl.UserController;
 import co.com.samtel.entities.Usuario;
-import co.com.samtel.repository.impl.IServiceUsuario;
+import co.com.samtel.service.IServiceUsuario;
 import co.com.samtel.util.BeanUtil;
 
 public class Test {
@@ -29,6 +29,8 @@ public class Test {
 			
 //			Usuario usser = userService.findById(1);
 //			System.out.println(usser.toString());
+			
+			
 	}
 
 }

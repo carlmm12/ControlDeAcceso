@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 
 import co.com.samtel.controller.IUserController;
 import co.com.samtel.entities.Usuario;
-import co.com.samtel.repository.impl.IServiceUsuario;
+import co.com.samtel.service.IServiceUsuario;
 import co.com.samtel.util.BeanUtil;
 
 @Controller
