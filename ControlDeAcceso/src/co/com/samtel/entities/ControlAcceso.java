@@ -5,16 +5,14 @@ import javax.persistence.*;
 
 
 /**
- * The persistent class for the tbl_control_accesos database table.
+ * The persistent class for the tblcontrol_accesos database table.
  * 
  */
 @Entity
-@Table(name="tbl_control_accesos")
+@Table(name="tblcontrol_accesos")
 @NamedQuery(name="ControlAcceso.findAll", query="SELECT c FROM ControlAcceso c")
 public class ControlAcceso implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-
 
 	@EmbeddedId
 	private ControlAccesoPK id;
@@ -82,13 +80,5 @@ public class ControlAcceso implements Serializable {
 	public void setTmno(int tmno) {
 		this.tmno = tmno;
 	}
-
-	@Override
-	public String toString() {
-		return "ControlAcceso [id=" + id + ", inout=" + inout + ", mode=" + mode + ", name=" + name + ", tmno=" + tmno
-				+ "]";
-	}
-	
-	
 
 }

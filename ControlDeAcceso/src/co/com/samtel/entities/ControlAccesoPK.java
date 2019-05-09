@@ -6,7 +6,7 @@ import java.util.Date;
 import javax.persistence.*;
 
 /**
- * The primary key class for the tbl_control_accesos database table.
+ * The primary key class for the tblcontrol_accesos database table.
  * 
  */
 @Embeddable
@@ -14,29 +14,18 @@ public class ControlAccesoPK implements Serializable {
 	//default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;
 
-	private String enno;
-
 	@Temporal(TemporalType.TIMESTAMP)
 	private java.util.Date datetime;
+
+	private int enno;
 
 	public ControlAccesoPK() {
 	}
 	
 	
-	public ControlAccesoPK( Date datetime ,String enno) {
+	public ControlAccesoPK(Date datetime, int enno) {
 		super();
-		this.enno = enno;
 		this.datetime = datetime;
-	}
-
-
-	
-	public String getEnno() {
-		return enno;
-	}
-
-
-	public void setEnno(String enno) {
 		this.enno = enno;
 	}
 
@@ -47,7 +36,12 @@ public class ControlAccesoPK implements Serializable {
 	public void setDatetime(java.util.Date datetime) {
 		this.datetime = datetime;
 	}
-	
+	public int getEnno() {
+		return this.enno;
+	}
+	public void setEnno(int enno) {
+		this.enno = enno;
+	}
 
 	public boolean equals(Object other) {
 		if (this == other) {
@@ -58,24 +52,16 @@ public class ControlAccesoPK implements Serializable {
 		}
 		ControlAccesoPK castOther = (ControlAccesoPK)other;
 		return 
-			this.enno.equals(castOther.enno)
-			&& this.datetime.equals(castOther.datetime);
+			this.datetime.equals(castOther.datetime)
+			&& (this.enno == castOther.enno);
 	}
 
 	public int hashCode() {
 		final int prime = 31;
 		int hash = 17;
-		hash = hash * prime + this.enno.hashCode();
 		hash = hash * prime + this.datetime.hashCode();
+		hash = hash * prime + this.enno;
 		
 		return hash;
 	}
-
-
-	@Override
-	public String toString() {
-		return "ControlAccesoPK [enno=" + enno + ", datetime=" + datetime + "]";
-	}
-	
-	
 }

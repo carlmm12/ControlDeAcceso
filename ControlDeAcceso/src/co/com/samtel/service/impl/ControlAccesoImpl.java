@@ -30,7 +30,7 @@ public class ControlAccesoImpl implements IServiceControlAcceso {
 		// TODO Auto-generated method stub
 		
 		
-		controlA.insertControlAcc(entity.getTmno(),Integer.parseInt(entity.getId().getEnno()) , entity.getName(), entity.getInout(),entity.getMode() , entity.getId().getDatetime());
+		controlA.insertControlAcc(entity.getTmno(),entity.getId().getEnno() , entity.getName(), entity.getInout(),entity.getMode() , entity.getId().getDatetime());
 		
 	}
 

@@ -27,7 +27,7 @@ public class UsuarioDaoImpl implements IServiceUsuario {
 
 	public void save(Usuario entity) {
         try {
-			iUS.save(entity);
+			iUS.findAllByID(entity.getId());
 		} catch (Exception e) {
 			System.out.println(e);
 		}

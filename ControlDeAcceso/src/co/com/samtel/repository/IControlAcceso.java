@@ -17,7 +17,7 @@ import co.com.samtel.entities.ControlAcceso;
 public interface IControlAcceso  extends JpaRepository<ControlAcceso, Integer> {
 
 	@Modifying
-	@Query(value = "INSERT INTO controlacceso.tbl_control_accesos" + 
+	@Query(value = "INSERT INTO controlacceso.tblcontrol_accesos" + 
 			"(tmno, enno, name, `inout`, mode, `datetime`)" + 
 			"VALUES(:tmno,:enno,:name ,:inout,:mode,:datatime)", nativeQuery = true)
 	@Transactional

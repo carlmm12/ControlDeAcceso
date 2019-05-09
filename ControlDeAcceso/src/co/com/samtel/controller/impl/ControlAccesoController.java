@@ -27,7 +27,7 @@ public class ControlAccesoController implements IControlAccessoController {
 	private IServiceControlAcceso conAccService;
 
 	/*
-	 * Este metodo me permite generar usar el servicio de Usuario.
+	 * Este metodo me permite generar usar el servicio de controlAcceso.
 	 */
 	@Override
 	public IServiceControlAcceso getControlAccesoService() {
@@ -74,7 +74,7 @@ public class ControlAccesoController implements IControlAccessoController {
 			while ((line = reader.readNext()) != null) {
 				Date date = formatter.parse(line[5]);
 				// ControlAcceso user = new ControlAcceso(id, ya, ya, name, tmno);
-				ControlAcceso cAcceso = new ControlAcceso(new ControlAccesoPK(new Timestamp(date.getTime()), line[1]),
+				ControlAcceso cAcceso = new ControlAcceso(new ControlAccesoPK(new Timestamp(date.getTime()), Integer.parseInt(line[1])),
 						Integer.parseInt(line[3]), Integer.parseInt(line[4]), line[2], Integer.parseInt(line[0]));
 				// System.out.println(cAcceso.toString() + cAcceso.getId().toString());
 				Create(cAcceso);
