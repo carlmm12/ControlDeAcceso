@@ -27,7 +27,7 @@ public class UsuarioDaoImpl implements IServiceUsuario {
 
 	public void save(Usuario entity) {
         try {
-			iUS.findAllByID(entity.getId());
+			iUS.findAllByID(entity.getCedula());
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -40,12 +40,12 @@ public class UsuarioDaoImpl implements IServiceUsuario {
 		return null;
 	}
 
-	public Usuario findById(Integer id) {
+	public Usuario findById(String id) {
 		// TODO Auto-generated method stub
 		return iUS.findAllByID(id);
 	}
 
-	public boolean existsById(Integer id) {
+	public boolean existsById(String id) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -60,7 +60,7 @@ public class UsuarioDaoImpl implements IServiceUsuario {
 		return 0;
 	}
 
-	public void deleteById(Integer id) {
+	public void deleteById(String id) {
 		// TODO Auto-generated method stub
 
 	}
@@ -68,6 +68,12 @@ public class UsuarioDaoImpl implements IServiceUsuario {
 	public void delete(Usuario entity) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public Usuario findById(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

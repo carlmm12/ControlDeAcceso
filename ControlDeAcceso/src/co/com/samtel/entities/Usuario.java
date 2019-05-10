@@ -17,29 +17,25 @@ public class Usuario implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	private String cedula;
 
 	private int estado;
 
 	private String nombre;
 
-	//bi-directional many-to-one association to ControlAccesosOrd
+	//bi-directional many-to-one association to CodigoUsuario
 	@OneToMany(mappedBy="tblusuario")
-	private List<ControlAccesosOrd> tblcontrolAccesosOrds;
-
-	//bi-directional many-to-one association to ControlDiario
-	@OneToMany(mappedBy="tblusuario")
-	private List<ControlDiario> tblcontrolDiarios;
+	private List<CodigoUsuario> tblcodigoUsuarios;
 
 	public Usuario() {
 	}
 
-	public int getId() {
-		return this.id;
+	public String getCedula() {
+		return this.cedula;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setCedula(String cedula) {
+		this.cedula = cedula;
 	}
 
 	public int getEstado() {
@@ -58,48 +54,26 @@ public class Usuario implements Serializable {
 		this.nombre = nombre;
 	}
 
-	public List<ControlAccesosOrd> getTblcontrolAccesosOrds() {
-		return this.tblcontrolAccesosOrds;
+	public List<CodigoUsuario> getTblcodigoUsuarios() {
+		return this.tblcodigoUsuarios;
 	}
 
-	public void setTblcontrolAccesosOrds(List<ControlAccesosOrd> tblcontrolAccesosOrds) {
-		this.tblcontrolAccesosOrds = tblcontrolAccesosOrds;
+	public void setTblcodigoUsuarios(List<CodigoUsuario> tblcodigoUsuarios) {
+		this.tblcodigoUsuarios = tblcodigoUsuarios;
 	}
 
-	public ControlAccesosOrd addTblcontrolAccesosOrd(ControlAccesosOrd tblcontrolAccesosOrd) {
-		getTblcontrolAccesosOrds().add(tblcontrolAccesosOrd);
-		tblcontrolAccesosOrd.setTblusuario(this);
+	public CodigoUsuario addTblcodigoUsuario(CodigoUsuario tblcodigoUsuario) {
+		getTblcodigoUsuarios().add(tblcodigoUsuario);
+		tblcodigoUsuario.setTblusuario(this);
 
-		return tblcontrolAccesosOrd;
+		return tblcodigoUsuario;
 	}
 
-	public ControlAccesosOrd removeTblcontrolAccesosOrd(ControlAccesosOrd tblcontrolAccesosOrd) {
-		getTblcontrolAccesosOrds().remove(tblcontrolAccesosOrd);
-		tblcontrolAccesosOrd.setTblusuario(null);
+	public CodigoUsuario removeTblcodigoUsuario(CodigoUsuario tblcodigoUsuario) {
+		getTblcodigoUsuarios().remove(tblcodigoUsuario);
+		tblcodigoUsuario.setTblusuario(null);
 
-		return tblcontrolAccesosOrd;
-	}
-
-	public List<ControlDiario> getTblcontrolDiarios() {
-		return this.tblcontrolDiarios;
-	}
-
-	public void setTblcontrolDiarios(List<ControlDiario> tblcontrolDiarios) {
-		this.tblcontrolDiarios = tblcontrolDiarios;
-	}
-
-	public ControlDiario addTblcontrolDiario(ControlDiario tblcontrolDiario) {
-		getTblcontrolDiarios().add(tblcontrolDiario);
-		tblcontrolDiario.setTblusuario(this);
-
-		return tblcontrolDiario;
-	}
-
-	public ControlDiario removeTblcontrolDiario(ControlDiario tblcontrolDiario) {
-		getTblcontrolDiarios().remove(tblcontrolDiario);
-		tblcontrolDiario.setTblusuario(null);
-
-		return tblcontrolDiario;
+		return tblcodigoUsuario;
 	}
 
 }

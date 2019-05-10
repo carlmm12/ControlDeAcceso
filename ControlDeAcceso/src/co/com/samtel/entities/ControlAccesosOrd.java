@@ -26,10 +26,10 @@ public class ControlAccesosOrd implements Serializable {
 	@Column(name="tipo_acceso")
 	private int tipoAcceso;
 
-	//bi-directional many-to-one association to Usuario
+	//bi-directional many-to-one association to CodigoUsuario
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="tblusuarios_id")
-	private Usuario tblusuario;
+	@JoinColumn(name="tblcodigo_usuarios_codigo")
+	private CodigoUsuario tblcodigoUsuario;
 
 	//bi-directional many-to-one association to ControlDiario
 	@OneToMany(mappedBy="tblcontrolAccesosOrd1")
@@ -66,12 +66,12 @@ public class ControlAccesosOrd implements Serializable {
 		this.tipoAcceso = tipoAcceso;
 	}
 
-	public Usuario getTblusuario() {
-		return this.tblusuario;
+	public CodigoUsuario getTblcodigoUsuario() {
+		return this.tblcodigoUsuario;
 	}
 
-	public void setTblusuario(Usuario tblusuario) {
-		this.tblusuario = tblusuario;
+	public void setTblcodigoUsuario(CodigoUsuario tblcodigoUsuario) {
+		this.tblcodigoUsuario = tblcodigoUsuario;
 	}
 
 	public List<ControlDiario> getTblcontrolDiarios1() {

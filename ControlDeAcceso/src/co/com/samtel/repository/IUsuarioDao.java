@@ -10,9 +10,9 @@ import co.com.samtel.entities.Usuario;
 
 
 @Repository
-public interface IUsuarioDao extends JpaRepository<Usuario, Integer> {
+public interface IUsuarioDao extends JpaRepository<Usuario, String> {
 
 	
 	@Query("select u from Usuario u  where u.id = :id")
-	Usuario findAllByID(@Param("id")int id);
+	Usuario findAllByID(@Param("id")String id);
 }
