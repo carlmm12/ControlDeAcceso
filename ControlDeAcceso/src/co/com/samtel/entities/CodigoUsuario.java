@@ -2,6 +2,7 @@ package co.com.samtel.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.math.BigInteger;
 import java.util.List;
 
 
@@ -19,10 +20,7 @@ public class CodigoUsuario implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int codigo;
 
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="tblusuarios_cedula")
-	private Usuario tblusuario;
+	private BigInteger cedula;
 
 	//bi-directional many-to-one association to ControlAccesosOrd
 	@OneToMany(mappedBy="tblcodigoUsuario")
@@ -43,12 +41,12 @@ public class CodigoUsuario implements Serializable {
 		this.codigo = codigo;
 	}
 
-	public Usuario getTblusuario() {
-		return this.tblusuario;
+	public BigInteger getCedula() {
+		return this.cedula;
 	}
 
-	public void setTblusuario(Usuario tblusuario) {
-		this.tblusuario = tblusuario;
+	public void setCedula(BigInteger cedula) {
+		this.cedula = cedula;
 	}
 
 	public List<ControlAccesosOrd> getTblcontrolAccesosOrds() {

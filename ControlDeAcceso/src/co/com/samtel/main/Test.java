@@ -20,12 +20,12 @@ public class Test {
 	
 	public static void main(String[] args) {
 	
-//			for (Usuario usuario : uc.usuarios()) {
-//				System.out.println(usuario.toString());
-//		
-//			}
+			for (Usuario usuario : uc.usuarios()) {
+				System.out.println(usuario.toString());
+		
+			}
 			
-			cac.CSVReader();
+			//cac.CSVReader();
 			
 //			Usuario usser = userService.findById(1);
 //			System.out.println(usser.toString());

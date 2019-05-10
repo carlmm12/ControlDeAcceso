@@ -12,6 +12,7 @@ import co.com.samtel.util.BeanUtil;
 @Controller
 public class UserController implements IUserController {
    
+	
 	private IServiceUsuario userService;
 
 

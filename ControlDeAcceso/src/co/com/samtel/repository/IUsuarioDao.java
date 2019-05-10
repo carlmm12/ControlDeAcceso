@@ -12,7 +12,7 @@ import co.com.samtel.entities.Usuario;
 @Repository
 public interface IUsuarioDao extends JpaRepository<Usuario, String> {
 
-	
-	@Query("select u from Usuario u  where u.id = :id")
-	Usuario findAllByID(@Param("id")String id);
+	 
+	@Query("SELECT u FROM Usuario u  where u.cedula = :id")
+	Usuario findAllByID(@Param("id") String id);
 }
