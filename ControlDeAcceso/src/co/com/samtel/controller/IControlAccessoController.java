@@ -8,5 +8,5 @@ public interface IControlAccessoController {
 	IServiceControlAcceso getControlAccesoService();
     Boolean CSVReader();
     void create(ControlAcceso entity);
-
+    
 }

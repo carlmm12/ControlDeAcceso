@@ -1,5 +1,6 @@
 package co.com.samtel.service.impl;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle.Control;
@@ -67,6 +68,18 @@ public class ControlAccesoImpl implements IServiceControlAcceso {
 	public void delete(ControlAcceso entity) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public List<ControlAcceso> findByMonth(int month) {
+		// TODO Auto-generated method stub
+		return controlA.findByMonth(month);
+	}
+
+	@Override
+	public int countByDay(int id, Date fecha) {
+		// TODO Auto-generated method stub
+		return controlA.countByDay(id, fecha);
 	}
 
 }

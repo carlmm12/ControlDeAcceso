@@ -7,4 +7,6 @@ public interface IControlAccesoOrdController {
 
 	
 	IServiceControlAccesoOrd getControlAccesoOrdService();
+	IServiceControlAcceso getControlAccesoService();
+	void register(int month);
 }
