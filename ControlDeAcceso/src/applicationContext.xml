@@ -14,10 +14,18 @@
     <!-- Cargamos los repositorios Spring Data -->
     <jpa:repositories base-package="co.com.samtel.repository" />
 
-    <!-- Configuracion del Datasource -->
+<!--     Configuracion del Datasource en servidor -->
+<!--     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"> -->
+<!--         <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/> -->
+<!--         <property name="url" value="jdbc:mysql://192.165.30.247:3306/controlacceso"/> -->
+<!--         <property name="username" value="ubuntu"/> -->
+<!--         <property name="password" value="ubuntu"/> -->
+<!--     </bean> -->
+
+   <!-- Configuracion del Datasource local -->
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://192.168.10.247:3306/controlacceso"/>
+        <property name="url" value="jdbc:mysql://192.165.30.247:3306/controlacceso"/>
         <property name="username" value="ubuntu"/>
         <property name="password" value="ubuntu"/>
     </bean>
