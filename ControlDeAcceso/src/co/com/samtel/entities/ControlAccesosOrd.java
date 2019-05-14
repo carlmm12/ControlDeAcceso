@@ -25,6 +25,16 @@ public class ControlAccesosOrd implements Serializable {
 
 	@Column(name="tipo_acceso")
 	private int tipoAcceso;
+	
+	
+
+	public ControlAccesosOrd(int id, Date fecha, int tipoAcceso, CodigoUsuario tblcodigoUsuario) {
+		super();
+		this.id = id;
+		this.fecha = fecha;
+		this.tipoAcceso = tipoAcceso;
+		this.tblcodigoUsuario = tblcodigoUsuario;
+	}
 
 	//bi-directional many-to-one association to CodigoUsuario
 	@ManyToOne(fetch=FetchType.LAZY)
@@ -118,4 +128,11 @@ public class ControlAccesosOrd implements Serializable {
 		return tblcontrolDiarios2;
 	}
 
+	@Override
+	public String toString() {
+		return "ControlAccesosOrd [id=" + id + ", fecha=" + fecha + ", tipoAcceso=" + tipoAcceso + ", tblcodigoUsuario="
+				+ tblcodigoUsuario + "]";
+	}
+
+	
 }

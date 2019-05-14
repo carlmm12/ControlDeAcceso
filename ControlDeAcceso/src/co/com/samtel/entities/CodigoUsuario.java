@@ -33,6 +33,14 @@ public class CodigoUsuario implements Serializable {
 	public CodigoUsuario() {
 	}
 
+	
+	public CodigoUsuario(int codigo, BigInteger cedula) {
+		super();
+		this.codigo = codigo;
+		this.cedula = cedula;
+	}
+
+
 	public int getCodigo() {
 		return this.codigo;
 	}

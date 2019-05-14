@@ -70,8 +70,38 @@ public class CodigoUsuarioImpl implements IServiceCodigoUsuario {
 
 	@Override
 	public CodigoUsuario findByCode(Integer codigo) {
-		// TODO Auto-generated method stub
-		return codigoUs.findByCode(codigo);
+		
+		CodigoUsuario codeUser = codigoUs.findByCode(codigo);
+		
+		
+		
+		if(codeUser != null) {
+			
+			return codeUser;
+		}else {
+			 try {
+				 System.out.println("error vamos a registrar");
+				 codigoUs.insertCodigo(codigo);
+				 codeUser = codigoUs.findByCode(codigo);
+			} catch (Exception e) {
+				System.out.println("error de registro");
+			}
+			
+		}
+		
+		return codeUser;
+	}
+
+
+	@Override
+	public void insertCodigo(Integer codigo) {
+		try {
+			codigoUs.insertCodigo(codigo);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e);
+		}
+		
 	}
 
 }

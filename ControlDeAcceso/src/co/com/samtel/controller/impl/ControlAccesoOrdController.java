@@ -1,5 +1,6 @@
 package co.com.samtel.controller.impl;
 
+import java.math.BigInteger;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import co.com.samtel.controller.IControlAccesoOrdController;
 import co.com.samtel.entities.CodigoUsuario;
 import co.com.samtel.entities.ControlAcceso;
+import co.com.samtel.entities.ControlAccesosOrd;
 import co.com.samtel.service.IServiceCodigoUsuario;
 import co.com.samtel.service.IServiceControlAcceso;
 import co.com.samtel.service.IServiceControlAccesoOrd;
@@ -23,7 +25,8 @@ public class ControlAccesoOrdController implements IControlAccesoOrdController {
 	private IServiceControlAcceso conAccService;
 	private IServiceCodigoUsuario codUserService;
 	private List<ControlAcceso> accesos;
-	private Optional<CodigoUsuario> usuarioCod;
+	private CodigoUsuario usuarioCod;
+	private ControlAccesosOrd codigoAccessOrd;
 
 	/*
 	 * Este metodo me permite generar usar el servicio de codigoUsuario.
@@ -93,9 +96,10 @@ public class ControlAccesoOrdController implements IControlAccesoOrdController {
 				 * llamado al usuario de acuerdo a lo registros del control de acceso por fecha
 				 * especificada
 				 */
-				this.usuarioCod = getCodigoUsuarioService().findById(codigo);
+
+				this.usuarioCod = getCodigoUsuarioService().findByCode(codigo);
+
 				System.out.println(usuarioCod.toString());
-				
 
 				/*
 				 * llamado al metodo que me trae la lista de los registros por usuario de
@@ -109,20 +113,29 @@ public class ControlAccesoOrdController implements IControlAccesoOrdController {
 					cont++;
 					if (cont % 2 == 0) {
 						System.out.println(controlesDiario.toString() + "par");
+						codigoAccessOrd = new ControlAccesosOrd(1, controlesDiario.getId().getDatetime(), 1,
+								usuarioCod);
+						System.out.println(this.codigoAccessOrd.toString());
+
 					} else {
 
 						System.out.println(controlesDiario.toString() + "impar");
+						codigoAccessOrd = new ControlAccesosOrd(1, controlesDiario.getId().getDatetime(), 2,
+								usuarioCod);
+						System.out.println(this.codigoAccessOrd.toString());
 					}
 
 				}
-				
+
 				if (cont % 2 == 0) {
+
 					System.out.println("termino par" + "par");
 				} else {
 
-					System.out.println("termino impar" +  "impar");
+					System.out.println("termino impar" + "impar");
+					System.out.println(this.codigoAccessOrd.toString());
+					System.out.println("termino el ciclo de los registros del usuario");
 				}
-				
 
 			}
 
