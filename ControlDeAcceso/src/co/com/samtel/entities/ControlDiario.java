@@ -31,17 +31,30 @@ public class ControlDiario implements Serializable {
 	private CodigoUsuario tblcodigoUsuario;
 
 	//bi-directional many-to-one association to ControlAccesosOrd
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="entrada")
-	private ControlAccesosOrd tblcontrolAccesosOrd1;
+	@OneToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="entrada", referencedColumnName = "id")
+	private ControlAccesosOrd entrada;
 
 	//bi-directional many-to-one association to ControlAccesosOrd
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="salida")
-	private ControlAccesosOrd tblcontrolAccesosOrd2;
+	@OneToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="salida", referencedColumnName = "id")
+	private ControlAccesosOrd salida;
 
 	public ControlDiario() {
 	}
+	
+
+	public ControlDiario(int id, Date fecha, Time tiempo, CodigoUsuario tblcodigoUsuario, ControlAccesosOrd entrada,
+			ControlAccesosOrd salida) {
+		super();
+		this.id = id;
+		this.fecha = fecha;
+		this.tiempo = tiempo;
+		this.tblcodigoUsuario = tblcodigoUsuario;
+		this.entrada = entrada;
+		this.salida = salida;
+	}
+
 
 	public int getId() {
 		return this.id;
@@ -75,20 +88,22 @@ public class ControlDiario implements Serializable {
 		this.tblcodigoUsuario = tblcodigoUsuario;
 	}
 
-	public ControlAccesosOrd getTblcontrolAccesosOrd1() {
-		return this.tblcontrolAccesosOrd1;
+	public ControlAccesosOrd getEntrada() {
+		return entrada;
 	}
 
-	public void setTblcontrolAccesosOrd1(ControlAccesosOrd tblcontrolAccesosOrd1) {
-		this.tblcontrolAccesosOrd1 = tblcontrolAccesosOrd1;
+	public void setEntrada(ControlAccesosOrd entrada) {
+		this.entrada = entrada;
 	}
 
-	public ControlAccesosOrd getTblcontrolAccesosOrd2() {
-		return this.tblcontrolAccesosOrd2;
+	public ControlAccesosOrd getSalida() {
+		return salida;
 	}
 
-	public void setTblcontrolAccesosOrd2(ControlAccesosOrd tblcontrolAccesosOrd2) {
-		this.tblcontrolAccesosOrd2 = tblcontrolAccesosOrd2;
+	public void setSalida(ControlAccesosOrd salida) {
+		this.salida = salida;
 	}
+
+	
 
 }

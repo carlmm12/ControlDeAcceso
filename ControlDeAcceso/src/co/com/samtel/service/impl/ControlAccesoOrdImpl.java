@@ -19,6 +19,11 @@ public class ControlAccesoOrdImpl implements IServiceControlAccesoOrd {
 	@Override
 	public void save(ControlAccesosOrd entity) {
 		// TODO Auto-generated method stub
+		try {
+			controlAccesoOrd.save(entity);
+		} catch (Exception e) {
+			System.out.println("Error al registrar");
+		}
 		
 	}
 
@@ -49,7 +54,7 @@ public class ControlAccesoOrdImpl implements IServiceControlAccesoOrd {
 	@Override
 	public long count() {
 		// TODO Auto-generated method stub
-		return 0;
+		return controlAccesoOrd.count();
 	}
 
 	@Override
@@ -62,6 +67,12 @@ public class ControlAccesoOrdImpl implements IServiceControlAccesoOrd {
 	public void delete(ControlAccesosOrd entity) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public int countOrd() {
+		// TODO Auto-generated method stub
+		return controlAccesoOrd.countOrd();
 	}
 
 }

@@ -44,6 +44,8 @@ public class Test {
 		 * control de horas
 		 */
 		caoc.register(4);
+		
+		
 
 	}
 
