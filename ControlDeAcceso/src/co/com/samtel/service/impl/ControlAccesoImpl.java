@@ -40,7 +40,7 @@ public class ControlAccesoImpl implements IServiceControlAcceso {
 		return null;
 	}
 
-	public ControlAcceso findById(Integer id) {
+	public Optional<ControlAcceso> findById(Integer id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -77,9 +77,27 @@ public class ControlAccesoImpl implements IServiceControlAcceso {
 	}
 
 	@Override
-	public int countByDay(int id, Date fecha) {
+	public int countByDay(int id, String fecha) {
 		// TODO Auto-generated method stub
 		return controlA.countByDay(id, fecha);
+	}
+
+	@Override
+	public List<String> countDate() {
+		// TODO Auto-generated method stub
+		return controlA.countDate();
+	}
+
+	@Override
+	public List<ControlAcceso> registroUsers(String fecha, int codigo) {
+		// TODO Auto-generated method stub
+		return controlA.registroUsers(fecha, codigo);
+	}
+
+	@Override
+	public List<Integer> usersDate(String fecha) {
+		// TODO Auto-generated method stub
+		return controlA.usersDate(fecha);
 	}
 
 }

@@ -1,6 +1,7 @@
 package co.com.samtel.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,7 +10,7 @@ import co.com.samtel.entities.CodigoUsuario;
 import co.com.samtel.repository.ICodigoUsuario;
 import co.com.samtel.service.IServiceCodigoUsuario;
 
-@Service("CodigoUsuarioBean")
+@Service("codigoUsuarioBean")
 public class CodigoUsuarioImpl implements IServiceCodigoUsuario {
 	
 	@Autowired
@@ -21,17 +22,6 @@ public class CodigoUsuarioImpl implements IServiceCodigoUsuario {
 		
 	}
 
-	@Override
-	public Boolean saveAll(List<CodigoUsuario> list) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public CodigoUsuario findById(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public boolean existsById(Integer id) {
@@ -61,6 +51,27 @@ public class CodigoUsuarioImpl implements IServiceCodigoUsuario {
 	public void delete(CodigoUsuario entity) {
 		// TODO Auto-generated method stub
 		
+	}
+
+
+	@Override
+	public Boolean saveAll(List<CodigoUsuario> list) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public Optional<CodigoUsuario> findById(Integer id) {
+		// TODO Auto-generated method stub
+		return codigoUs.findById(id);
+	}
+
+
+	@Override
+	public CodigoUsuario findByCode(Integer codigo) {
+		// TODO Auto-generated method stub
+		return codigoUs.findByCode(codigo);
 	}
 
 }

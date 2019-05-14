@@ -64,4 +64,12 @@ public class ControlAccesoPK implements Serializable {
 		
 		return hash;
 	}
+
+
+	@Override
+	public String toString() {
+		return "ControlAccesoPK [datetime=" + datetime + ", enno=" + enno + "]";
+	}
+	
+	
 }

@@ -81,4 +81,14 @@ public class ControlAcceso implements Serializable {
 		this.tmno = tmno;
 	}
 
+
+
+	@Override
+	public String toString() {
+		return "ControlAcceso [id=" + id + ", inout=" + inout + ", mode=" + mode + ", name=" + name + ", tmno=" + tmno
+				+ "]";
+	}
+	
+	
+
 }

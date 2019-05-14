@@ -41,6 +41,32 @@ public interface IControlAcceso  extends JpaRepository<ControlAcceso, Integer> {
 	 */
 	
 	@Query(value="select count(*) from controlacceso.tblcontrol_accesos where enno = :enno and  DATE(`datetime`) = :date ",nativeQuery = true )
-	public int countByDay(@Param("enno")int enno, @Param("date") Date date);
+	public int countByDay(@Param("enno")int enno, @Param("date") String date);
+	
+	
+	/*
+	 * metodo para traer todas las fechas
+	 */
+	
+	@Query(value="select DATE(`datetime`) as fecha from tblcontrol_accesos group by fecha", nativeQuery = true )
+	public List<String> countDate();
+	
+	
+	/*
+	 * Metodo que me trae todos los usuarios que se registraron en la fecha determinada 
+	 */
+	@Query(value="SELECT enno FROM tblcontrol_accesos WHERE DATE(`datetime`) = :date GROUP BY enno", nativeQuery = true )
+	public List<Integer> usersDate(@Param("date") String fecha);
+	
+	
+	
+	/*
+	 * Metodo que me trae todos los usuarios que se registraron en la fecha determinada 
+	 */
+	@Query(value="SELECT * FROM tblcontrol_accesos WHERE DATE(`datetime`) = :date AND enno = :id ORDER BY `datetime` ASC", nativeQuery = true )
+	public List<ControlAcceso> registroUsers(@Param("date") String fecha , @Param("id") int codigo );
+	
+	
+	
 	
 }

@@ -1,6 +1,7 @@
 package co.com.samtel.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,7 +29,7 @@ public class ControlAccesoOrdImpl implements IServiceControlAccesoOrd {
 	}
 
 	@Override
-	public ControlAccesosOrd findById(Integer id) {
+	public Optional<ControlAccesosOrd> findById(Integer id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

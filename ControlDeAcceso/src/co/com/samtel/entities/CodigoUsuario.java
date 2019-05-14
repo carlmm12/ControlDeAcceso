@@ -93,4 +93,12 @@ public class CodigoUsuario implements Serializable {
 		return tblcontrolDiario;
 	}
 
+	@Override
+	public String toString() {
+		return "CodigoUsuario [codigo=" + codigo + ", cedula=" + cedula + "]";
+	}
+	
+	
+	
+
 }

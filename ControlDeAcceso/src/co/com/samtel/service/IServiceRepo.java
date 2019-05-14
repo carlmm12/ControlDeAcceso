@@ -1,6 +1,9 @@
 package co.com.samtel.service;
 
 import java.util.List;
+import java.util.Optional;
+
+
 
 public interface IServiceRepo<T,PK> {
 	
@@ -8,7 +11,7 @@ public interface IServiceRepo<T,PK> {
 	
 	void save(T entity);
 	Boolean saveAll(List<T> list);
-	T findById(Integer id);
+	Optional<T> findById(Integer id);
 	boolean existsById(PK id);
 	List<T> findAll();
 	long count();

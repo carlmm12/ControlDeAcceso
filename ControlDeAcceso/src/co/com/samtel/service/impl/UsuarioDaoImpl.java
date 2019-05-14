@@ -1,6 +1,7 @@
 package co.com.samtel.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -71,7 +72,7 @@ public class UsuarioDaoImpl implements IServiceUsuario {
 	}
 
 	@Override
-	public Usuario findById(Integer id) {
+	public Optional<Usuario> findById(Integer id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
