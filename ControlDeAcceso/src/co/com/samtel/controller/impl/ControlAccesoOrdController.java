@@ -14,6 +14,7 @@ import co.com.samtel.controller.IControlAccesoOrdController;
 import co.com.samtel.entities.CodigoUsuario;
 import co.com.samtel.entities.ControlAcceso;
 import co.com.samtel.entities.ControlAccesosOrd;
+import co.com.samtel.entities.ControlAccesosOrdPK;
 import co.com.samtel.service.IServiceCodigoUsuario;
 import co.com.samtel.service.IServiceControlAcceso;
 import co.com.samtel.service.IServiceControlAccesoOrd;
@@ -126,16 +127,16 @@ public class ControlAccesoOrdController implements IControlAccesoOrdController {
 						
 						
 						System.out.println(controlesDiario.toString() + "par (salida)");
-						codigoAccessOrd = new ControlAccesosOrd(getControlAccesoOrdService().countOrd() + 1,
-								controlesDiario.getId().getDatetime(), 6, usuarioCod);
+						codigoAccessOrd = new ControlAccesosOrd(new ControlAccesosOrdPK(getControlAccesoOrdService().countOrd() + 1, controlesDiario.getId().getDatetime(), usuarioCod.getCodigo()), 6, usuarioCod);
+						
 						System.out.println(this.codigoAccessOrd.toString());
 						getControlAccesoOrdService().save(codigoAccessOrd);
 
 					} else {
 
 						System.out.println(controlesDiario.toString() + "impar (entrada)");
-						codigoAccessOrd = new ControlAccesosOrd(getControlAccesoOrdService().countOrd() + 1,
-								controlesDiario.getId().getDatetime(), 5, usuarioCod);
+						codigoAccessOrd = new ControlAccesosOrd(new ControlAccesosOrdPK(getControlAccesoOrdService().countOrd() + 1, controlesDiario.getId().getDatetime(), usuarioCod.getCodigo()), 5, usuarioCod);
+						
 						System.out.println(this.codigoAccessOrd.toString());
 						getControlAccesoOrdService().save(codigoAccessOrd);
 					}
@@ -150,12 +151,13 @@ public class ControlAccesoOrdController implements IControlAccesoOrdController {
 					System.out.println("termino par" + "par");
 				} else {
 
+					// corregir el metodo que registra si impar o no
 					System.out.println("termino impar" + "impar");
-					this.codigoAccessOrd.setId(getControlAccesoOrdService().countOrd() + 1);
+					this.codigoAccessOrd.getId().setId(getControlAccesoOrdService().countOrd() + 1);
 					this.codigoAccessOrd.setTipoAcceso(6);
 					System.out.println(this.codigoAccessOrd.toString());
 					System.out.println("termino el ciclo de los registros del usuario");
-					getControlAccesoOrdService().save(codigoAccessOrd);
+					getControlAccesoOrdService().saveImpar(codigoAccessOrd);
 				}
 
 			}

@@ -12,19 +12,33 @@ import co.com.samtel.service.IServiceControlAccesoOrd;
 
 @Service("ControlAccesoOrdBean")
 public class ControlAccesoOrdImpl implements IServiceControlAccesoOrd {
-	
+
 	@Autowired
 	public IcontrolAcessoOrd controlAccesoOrd;
 
 	@Override
 	public void save(ControlAccesosOrd entity) {
 		// TODO Auto-generated method stub
+
 		try {
-			controlAccesoOrd.save(entity);
+			System.out.println(entity.getId().getFecha() + "-" + entity.getTblcodigoUsuario().getCodigo());
+			List<ControlAccesosOrd> controlOrd = controlAccesoOrd.findAllControlAcc(entity.getId().getFecha(),
+					entity.getTblcodigoUsuario().getCodigo());
+
+			if (controlOrd == null || controlOrd.size() == 0) {
+
+				controlAccesoOrd.save(entity);
+
+			} else {
+
+				System.out.println("Ya fue insertado el registro");
+			}
+
 		} catch (Exception e) {
+			System.out.println(e);
 			System.out.println("Error al registrar");
 		}
-		
+
 	}
 
 	@Override
@@ -60,19 +74,44 @@ public class ControlAccesoOrdImpl implements IServiceControlAccesoOrd {
 	@Override
 	public void deleteById(Integer id) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void delete(ControlAccesosOrd entity) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public int countOrd() {
 		// TODO Auto-generated method stub
 		return controlAccesoOrd.countOrd();
+	}
+
+	@Override
+	public void saveImpar(ControlAccesosOrd entity) {
+
+		try {
+			System.out.println(entity.getId().getFecha() + "-" + entity.getTblcodigoUsuario().getCodigo());
+			List<ControlAccesosOrd> controlOrd = controlAccesoOrd.findAllControlAcc(entity.getId().getFecha(),
+					entity.getTblcodigoUsuario().getCodigo());
+
+			System.out.println(controlOrd.size());
+			
+			if (controlOrd.size() < 2) {
+
+				controlAccesoOrd.save(entity);
+
+			} else {
+
+				System.out.println("REGISTRO IMPAR YA REGISTRADO");
+			}
+
+		} catch (Exception e) {
+			System.out.println("Error al registrar");
+		}
+
 	}
 
 }

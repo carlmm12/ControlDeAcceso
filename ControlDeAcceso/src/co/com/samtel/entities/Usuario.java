@@ -2,6 +2,7 @@ package co.com.samtel.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.List;
 
 
 /**
@@ -21,6 +22,10 @@ public class Usuario implements Serializable {
 	private int estado;
 
 	private String nombre;
+
+	//bi-directional many-to-one association to cedula
+	@OneToOne(mappedBy="cedula")
+	private CodigoUsuario tblcodigoUsuarios;
 
 	public Usuario() {
 	}
@@ -49,10 +54,16 @@ public class Usuario implements Serializable {
 		this.nombre = nombre;
 	}
 
-	@Override
-	public String toString() {
-		return "Usuario [cedula=" + cedula + ", estado=" + estado + ", nombre=" + nombre + "]";
+
+
+	public CodigoUsuario getTblcodigoUsuarios() {
+		return tblcodigoUsuarios;
 	}
-	
+
+	public void setTblcodigoUsuarios(CodigoUsuario tblcodigoUsuarios) {
+		this.tblcodigoUsuarios = tblcodigoUsuarios;
+	}
+
+
 
 }

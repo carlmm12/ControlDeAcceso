@@ -5,5 +5,6 @@ import co.com.samtel.entities.ControlAccesosOrd;
 public interface IServiceControlAccesoOrd extends IServiceRepo<ControlAccesosOrd,Integer> {
 
 	int countOrd();
+	void saveImpar(ControlAccesosOrd entity);
 	
 }
