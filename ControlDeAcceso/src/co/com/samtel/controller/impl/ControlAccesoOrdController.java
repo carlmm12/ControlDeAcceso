@@ -151,7 +151,7 @@ public class ControlAccesoOrdController implements IControlAccesoOrdController {
 					System.out.println("termino par" + "par");
 				} else {
 
-					// corregir el metodo que registra si impar o no
+					
 					System.out.println("termino impar" + "impar");
 					this.codigoAccessOrd.getId().setId(getControlAccesoOrdService().countOrd() + 1);
 					this.codigoAccessOrd.setTipoAcceso(6);
