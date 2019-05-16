@@ -20,6 +20,7 @@ import co.com.samtel.controller.impl.UserController;
 import co.com.samtel.entities.Usuario;
 import co.com.samtel.repository.IControlDiario;
 import co.com.samtel.service.IServiceUsuario;
+import co.com.samtel.util.AlarmaControlDiarios;
 import co.com.samtel.util.BeanUtil;
 
 public class Test {
@@ -28,6 +29,7 @@ public class Test {
 	public static IControlAccessoController cac = new ControlAccesoController();
 	public static IControlAccesoOrdController caoc = new ControlAccesoOrdController();
 	public static IControlDiarioController cdi = new ControlDiarioController();
+	public static AlarmaControlDiarios alertaCD = new AlarmaControlDiarios();
 
 	public static void main(String[] args) throws ParseException {
 
@@ -35,18 +37,25 @@ public class Test {
 		Date date = formatter.parse("2019-04-01 18:57:42");
 		System.out.println(new Timestamp(date.getTime()));
 
-		// METODO QUE ME LEE EL ARCHIVO CSV Y ME REGISTRA LOS DATOS EN LA TABLA TBLCONTROL_ACCESOS TAL COMO VIENE DESDE EL ARCHIVO
-		
+		// METODO QUE ME LEE EL ARCHIVO CSV Y ME REGISTRA LOS DATOS EN LA TABLA
+		// TBLCONTROL_ACCESOS TAL COMO VIENE DESDE EL ARCHIVO
+
 		// cac.CSVReader();
-            
+
+		// METODO QUE ME ORDENA Y ME HACE EL REGISTRO ACTUALIZADO DE LOS DATOS BRUTOS
+		// QUE SE ALOJARON EN LA TABLA TBLCONTROL_ACCESOS
+
+		// caoc.register();
+
+		// METODO QUE ME PERMITE REGISTRAR EL LA TABLA CONTROL DIARIO TOMADO COMO
+		// REFERENCIA A LA ALERTA 1. CONTROL DIARIO POR USUARIO.
+
+		// cdi.alarmaControlDiario();
+
+		// METODO QUE ME PERMITIRA CRAER EL REPORTE CON LAS ALERTAS (ALERTA CONTROL
+		// DIARIO)
 		
-		// METODO QUE ME ORDENA Y ME HACE EL REGISTRO ACTUALIZADO DE LOS DATOS BRUTOS QUE SE ALOJARON EN LA TABLA TBLCONTROL_ACCESOS
-		
-	    caoc.register();
-		
-		// METODO QUE ME PERMITE REGISTRAR EL LA TABLA CONTROL DIARIO TOMADO COMO REFERENCIA A LA ALERTA 1. CONTROL DIARIO POR USUARIO.
-		
-		cdi.alarmaControlDiario();
+		alertaCD.reporteAlarma();
 
 	}
 
