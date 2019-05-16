@@ -1,13 +1,18 @@
 package co.com.samtel.main;
 
+import java.sql.Time;
 import java.sql.Timestamp;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Timer;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import com.mysql.jdbc.log.Log;
 
 import co.com.samtel.controller.IControlAccesoOrdController;
 import co.com.samtel.controller.IControlAccessoController;
@@ -17,6 +22,7 @@ import co.com.samtel.controller.impl.ControlAccesoController;
 import co.com.samtel.controller.impl.ControlAccesoOrdController;
 import co.com.samtel.controller.impl.ControlDiarioController;
 import co.com.samtel.controller.impl.UserController;
+import co.com.samtel.dto.ControlDiarioAlertaDto;
 import co.com.samtel.entities.Usuario;
 import co.com.samtel.repository.IControlDiario;
 import co.com.samtel.service.IServiceUsuario;
@@ -52,10 +58,16 @@ public class Test {
 
 		// cdi.alarmaControlDiario();
 
+		// METODO PARA CARGAR UN DTO CON REFERENCIA CONTROL DIARIO PARA LAS ALERTAS.
+
+		 List<ControlDiarioAlertaDto> control = cdi.convertEntity();
+		 System.out.println(control.size());
+
 		// METODO QUE ME PERMITIRA CRAER EL REPORTE CON LAS ALERTAS (ALERTA CONTROL
 		// DIARIO)
+
+		// alertaCD.reporteAlarma();
 		
-		alertaCD.reporteAlarma();
 
 	}
 

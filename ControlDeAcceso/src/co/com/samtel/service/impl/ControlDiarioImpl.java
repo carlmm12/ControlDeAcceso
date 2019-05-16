@@ -55,7 +55,7 @@ public class ControlDiarioImpl implements IServiceControlDiario {
 	@Override
 	public List<ControlDiario> findAll() {
 		// TODO Auto-generated method stub
-		return null;
+		return cdia.finndAll();
 	}
 
 	@Override

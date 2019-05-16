@@ -16,4 +16,9 @@ public interface IControlDiario extends JpaRepository<ControlDiario, Integer> {
 	
 	@Query(value="SELECT count(*) FROM tblcontrol_diario",nativeQuery=true)
 	int countC();
+	
+	@Query(value="SELECT cd FROM ControlDiario cd ")
+	List<ControlDiario> finndAll();
+	
+	
 }

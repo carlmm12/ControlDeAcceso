@@ -3,7 +3,9 @@ package co.com.samtel.controller;
 
 import java.text.ParseException;
 import java.util.Date;
+import java.util.List;
 
+import co.com.samtel.dto.ControlDiarioAlertaDto;
 import co.com.samtel.service.IServiceCodigoUsuario;
 import co.com.samtel.service.IServiceControlAcceso;
 import co.com.samtel.service.IServiceControlAccesoOrd;
@@ -17,4 +19,5 @@ public interface IControlDiarioController {
 	IServiceCodigoUsuario getCodigoUsuarioService();
 	void alarmaControlDiario();
 	Date convertToDate(String date ) ;
+    List<ControlDiarioAlertaDto> convertEntity();
 }

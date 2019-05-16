@@ -1,11 +1,15 @@
 package co.com.samtel.controller.impl;
 
+import java.sql.Time;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import co.com.samtel.controller.IControlDiarioController;
+import co.com.samtel.dto.ControlDiarioAlertaDto;
 import co.com.samtel.dto.ControlDiarioDto;
 import co.com.samtel.entities.CodigoUsuario;
 import co.com.samtel.entities.ControlDiario;
@@ -54,7 +58,7 @@ public class ControlDiarioController implements IControlDiarioController {
 	}
 
 	@Override
-	public Date convertToDate(String date)  {
+	public Date convertToDate(String date) {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		Date converDate;
 		try {
@@ -74,34 +78,88 @@ public class ControlDiarioController implements IControlDiarioController {
 	 */
 	@Override
 	public void alarmaControlDiario() {
-		
-		
+
 		// lamado a todas las fechas registradas en la tabla controlAccessoOrd
 		List<String> fechas = getControlAccesoOrdService().countDate();
-		
+
 		// llamado a todos los codigos de usuario de acuerdo a la fecha estipulada
-		
+
 		for (String fechasDia : fechas) {
 			System.out.println("fecha: " + fechasDia);
 			List<Integer> codUsers = getControlAccesoOrdService().usersDate(fechasDia);
 			for (Integer codUser : codUsers) {
-				
+
 				// carga del codigo de usuario de acuerdo al codigo
-				CodigoUsuario codigoUser = getCodigoUsuarioService().findByCodigo(codUser) ;
-				
-				// cargo el DTO que me permite traer el conteo de horas trabajadas y la fecha de entrada y salida de acuerdo a una fecha y un codigo de usuario
+				CodigoUsuario codigoUser = getCodigoUsuarioService().findByCodigo(codUser);
+
+				// cargo el DTO que me permite traer el conteo de horas trabajadas y la fecha de
+				// entrada y salida de acuerdo a una fecha y un codigo de usuario
 				ControlDiarioDto controlDto = getControlAccesoOrdService().controlDia(fechasDia, codUser);
-				
+
 				// asignación de valores a el control de dia lista para registrar
-				ControlDiario controlDia = new ControlDiario(getControlDiarioService().countC() + 1, codigoUser.getCodigo(), controlDto.getEntrada(), convertToDate(fechasDia), codigoUser.getTblusuario().getNombre(), controlDto.getSalida(), controlDto.getTiempo());
+				ControlDiario controlDia = new ControlDiario(getControlDiarioService().countC() + 1,
+						codigoUser.getCodigo(), controlDto.getEntrada(), convertToDate(fechasDia),
+						codigoUser.getTblusuario().getNombre(), controlDto.getSalida(), controlDto.getTiempo());
 				System.out.println(controlDia.toString());
-				
-				//metodo que me permitira registrar el control diario de cada usuario por fecha especifica
-				 getControlDiarioService().save(controlDia);
+
+				// metodo que me permitira registrar el control diario de cada usuario por fecha
+				// especifica
+				getControlDiarioService().save(controlDia);
 			}
 		}
+
+	}
+
+	@Override
+	public List<ControlDiarioAlertaDto> convertEntity() {
+
+		
+		List<ControlDiarioAlertaDto> controlAlertas = new ArrayList<ControlDiarioAlertaDto>();
 		
 		
+		try {
+
+			SimpleDateFormat format = new SimpleDateFormat("hh:mm"); // if 24 hour format
+			Date d1;
+			Time ppstime;
+			
+
+			d1 = (java.util.Date) format.parse("09:00:00");
+
+			ppstime = new java.sql.Time(d1.getTime());
+
+			System.out.println(d1);
+			System.out.println(ppstime);
+
+			List<ControlDiario> controlD = getControlDiarioService().findAll();
+			String alerta = "";
+			for (ControlDiario controlDiario : controlD) {
+				if (controlDiario.getTiempo().getHours() < 9) {
+					alerta = "EL USUARIO NO CUMPLE CON LAS 9 HORAS ESTABLECIDAS";
+					// System.out.println("EL usuario :" + controlDiario.getNombre() + " no cumplio
+					// las 9 horas correspondietes");
+
+				} else {
+					alerta = "";
+				}
+
+				ControlDiarioAlertaDto controlDA = new ControlDiarioAlertaDto(controlDiario.getFecha().toString(),
+						String.valueOf(controlDiario.getCodigoUsuario()), controlDiario.getNombre(),
+						controlDiario.getEntrada().toString(), controlDiario.getSalida().toString(),
+						controlDiario.getTiempo().toString(), alerta);
+				 System.out.println(controlDA.toString());
+				controlAlertas.add(controlDA);
+			}
+
+			return controlAlertas;
+
+		} catch (Exception e) {
+
+			System.out.println(e);
+
+		}
+
+		return controlAlertas;
 	}
 
 }
