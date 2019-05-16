@@ -13,12 +13,17 @@ import co.com.samtel.entities.CodigoUsuario;
 public interface ICodigoUsuario extends JpaRepository<CodigoUsuario, Integer> {
 	
 	@Query (value="SELECT * FROM tblcodigo_usuarios WHERE codigo = :codigo", nativeQuery=true)
+	@Transactional
 	CodigoUsuario findByCode(@Param("codigo") Integer codigo);
 	
 	@Modifying
 	@Query (value="INSERT INTO controlacceso.tblcodigo_usuarios (codigo, cedula) VALUES(:cod, 999999999)", nativeQuery=true)
 	@Transactional
 	void insertCodigo(@Param("cod") Integer codigo);
+	
+	@Query ("FROM CodigoUsuario c inner join fetch c.tblusuario WHERE c.codigo = :codigo")
+	@Transactional
+	CodigoUsuario findByCod(@Param("codigo") Integer codigo);
 	
 	
 

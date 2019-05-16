@@ -23,19 +23,32 @@ public class ControlDiario implements Serializable {
 	@Column(name="codigo_usuario")
 	private int codigoUsuario;
 
-	private int entrada;
+	private Time entrada;
 
 	@Temporal(TemporalType.DATE)
 	private Date fecha;
 
 	private String nombre;
 
-	private int salida;
+	private Time salida;
 
 	private Time tiempo;
 
 	public ControlDiario() {
 	}
+	
+
+	public ControlDiario(int id, int codigoUsuario, Time entrada, Date fecha, String nombre, Time salida, Time tiempo) {
+		super();
+		this.id = id;
+		this.codigoUsuario = codigoUsuario;
+		this.entrada = entrada;
+		this.fecha = fecha;
+		this.nombre = nombre;
+		this.salida = salida;
+		this.tiempo = tiempo;
+	}
+
 
 	public int getId() {
 		return this.id;
@@ -53,13 +66,7 @@ public class ControlDiario implements Serializable {
 		this.codigoUsuario = codigoUsuario;
 	}
 
-	public int getEntrada() {
-		return this.entrada;
-	}
 
-	public void setEntrada(int entrada) {
-		this.entrada = entrada;
-	}
 
 	public Date getFecha() {
 		return this.fecha;
@@ -77,11 +84,20 @@ public class ControlDiario implements Serializable {
 		this.nombre = nombre;
 	}
 
-	public int getSalida() {
-		return this.salida;
+
+	public Time getEntrada() {
+		return entrada;
 	}
 
-	public void setSalida(int salida) {
+	public void setEntrada(Time entrada) {
+		this.entrada = entrada;
+	}
+
+	public Time getSalida() {
+		return salida;
+	}
+
+	public void setSalida(Time salida) {
 		this.salida = salida;
 	}
 
@@ -93,4 +109,12 @@ public class ControlDiario implements Serializable {
 		this.tiempo = tiempo;
 	}
 
+
+	@Override
+	public String toString() {
+		return "ControlDiario [id=" + id + ", codigoUsuario=" + codigoUsuario + ", entrada=" + entrada + ", fecha="
+				+ fecha + ", nombre=" + nombre + ", salida=" + salida + ", tiempo=" + tiempo + "]";
+	}
+
+	
 }

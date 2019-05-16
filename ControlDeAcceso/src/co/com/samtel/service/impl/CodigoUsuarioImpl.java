@@ -104,4 +104,11 @@ public class CodigoUsuarioImpl implements IServiceCodigoUsuario {
 		
 	}
 
+
+	@Override
+	public CodigoUsuario findByCodigo(Integer codigo) {
+		// TODO Auto-generated method stub
+		return codigoUs.findByCod(codigo);
+	}
+
 }

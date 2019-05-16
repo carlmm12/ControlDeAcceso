@@ -82,7 +82,7 @@ public class ControlAccesoOrdController implements IControlAccesoOrdController {
 	}
 	
 	@Override
-	public void register(int month) {
+	public void register() {
 		int cont = 0;
 
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");

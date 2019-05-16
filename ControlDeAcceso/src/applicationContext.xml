@@ -25,7 +25,7 @@
    <!-- Configuracion del Datasource local -->
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://localhost:3306/controlacceso"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/controlacceso?useSSL=false&amp;serverTimezone=UTC"/>
         <property name="username" value="ubuntu"/>
         <property name="password" value="ubuntu"/> 
     </bean>
@@ -35,6 +35,7 @@
         <property name="showSql" value="true"/>
         <property name="generateDdl" value="true"/>
         <property name="database" value="MYSQL"/>
+        
         
     </bean>
      

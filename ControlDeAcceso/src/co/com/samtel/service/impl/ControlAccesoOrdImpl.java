@@ -1,11 +1,19 @@
 package co.com.samtel.service.impl;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Time;
 import java.util.List;
 import java.util.Optional;
+
+import javax.persistence.SqlResultSetMapping;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import co.com.samtel.dto.ControlDiarioDto;
+import co.com.samtel.entities.CodigoUsuario;
+import co.com.samtel.entities.ControlAcceso;
 import co.com.samtel.entities.ControlAccesosOrd;
 import co.com.samtel.repository.IcontrolAcessoOrd;
 import co.com.samtel.service.IServiceControlAccesoOrd;
@@ -113,5 +121,39 @@ public class ControlAccesoOrdImpl implements IServiceControlAccesoOrd {
 		}
 
 	}
+	
+	
+	@Override
+	public List<String> countDate() {
+		// TODO Auto-generated method stub
+		return controlAccesoOrd.countDate();
+	}
+	
+	@Override
+	public List<Integer> usersDate(String fecha) {
+		// TODO Auto-generated method stub
+		return controlAccesoOrd.usersDate(fecha);
+	}
 
+	@Override
+	public List<ControlAccesosOrd> registroUsers(String fecha, int codigo) {
+		// TODO Auto-generated method stub
+		return controlAccesoOrd.registroUsers(fecha, codigo);
+	}
+
+	@Override
+	public ControlDiarioDto controlDia(String fecha ,  int codigo ) {
+		
+		 System.out.println("la fecha y el usuario es: " + fecha +"---" + codigo);
+		List<Object[]> obj = (List<Object[]>) controlAccesoOrd.controlDia(fecha, codigo);
+		ControlDiarioDto controlD = null;
+		
+		for (Object[] ob : obj) {
+			
+			controlD = new ControlDiarioDto((Time)ob[0], (Time)ob[1], (Time)ob[2]);
+			
+		}
+	
+		return controlD;
+	}
 }

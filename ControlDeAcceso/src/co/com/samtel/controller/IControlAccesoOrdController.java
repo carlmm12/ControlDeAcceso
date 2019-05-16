@@ -10,5 +10,5 @@ public interface IControlAccesoOrdController {
 	IServiceControlAccesoOrd getControlAccesoOrdService();
 	IServiceControlAcceso getControlAccesoService();
 	IServiceCodigoUsuario getCodigoUsuarioService();
-	void register(int month);
+	void register();
 }

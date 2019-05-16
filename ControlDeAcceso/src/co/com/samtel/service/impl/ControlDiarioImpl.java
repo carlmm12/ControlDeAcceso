@@ -12,14 +12,26 @@ import co.com.samtel.service.IServiceControlDiario;
 
 @Service("ControlDiarioBean")
 public class ControlDiarioImpl implements IServiceControlDiario {
-	
+
 	@Autowired
-	public IControlDiario controDiario;
+	public IControlDiario cdia;
 
 	@Override
 	public void save(ControlDiario entity) {
-		// TODO Auto-generated method stub
-		
+
+		List<ControlDiario> controles = cdia.findControlD(entity.getFecha(), entity.getCodigoUsuario());
+
+		if (controles.size() < 1) {
+
+			try {
+				cdia.save(entity);
+			} catch (Exception e) {
+				System.out.println("ERROR  AL REGISTRAR  EL CONTROL DIARIO ");
+			}
+		} else {
+			System.out.println("ERROR EL CONTROL DIARIO YA FUE REGISTRADO");
+		}
+
 	}
 
 	@Override
@@ -55,16 +67,19 @@ public class ControlDiarioImpl implements IServiceControlDiario {
 	@Override
 	public void deleteById(Integer id) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void delete(ControlDiario entity) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
+	@Override
+	public int countC() {
+		// TODO Auto-generated method stub
+		return cdia.countC();
+	}
 
-
-	
 }

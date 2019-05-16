@@ -18,12 +18,10 @@ public class CodigoUsuario implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int codigo;
 
-	//bi-directional many-to-one association to Usuario
-	
-	
-	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
-    @JoinColumn(name = "cedula", referencedColumnName = "cedula")
-	private Usuario cedula;
+	//bi-directional one-to-one association to Usuario
+	@OneToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="cedula")
+	private Usuario tblusuario;
 
 	public CodigoUsuario() {
 	}
@@ -37,11 +35,11 @@ public class CodigoUsuario implements Serializable {
 	}
 
 	public Usuario getTblusuario() {
-		return this.cedula;
+		return this.tblusuario;
 	}
 
 	public void setTblusuario(Usuario tblusuario) {
-		this.cedula = tblusuario;
+		this.tblusuario = tblusuario;
 	}
 
 }
