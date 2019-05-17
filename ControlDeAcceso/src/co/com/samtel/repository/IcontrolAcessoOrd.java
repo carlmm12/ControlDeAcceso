@@ -62,5 +62,8 @@ public interface IcontrolAcessoOrd  extends JpaRepository<ControlAccesosOrd, Int
 	@Query(value="SELECT MIN(TIME(fecha)) AS entrada, max(TIME(fecha)) AS salida, TIMEDIFF(MAX(fecha), MIN(fecha)) AS tiempo  FROM tblcontrol_accesos_ord  WHERE DAte(fecha) = :fecha AND tblcodigo_usuarios_codigo = :codigo ", nativeQuery = true )
 	public List<Object[]> controlDia(@Param("fecha") String fecha , @Param("codigo") int codigo );
 	
+	@Query(value="SELECT MIN(TIME(fecha)) AS entrada, max(TIME(fecha)) AS salida, TIMEDIFF(TIMEDIFF(MAX(fecha), MIN(fecha)) , '01:00:00') AS tiempo  FROM tblcontrol_accesos_ord  WHERE DAte(fecha) = :fecha AND tblcodigo_usuarios_codigo = :codigo", nativeQuery = true )
+	public List<Object[]> controlDias(@Param("fecha") String fecha , @Param("codigo") int codigo );
+	
 	
 }

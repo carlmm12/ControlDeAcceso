@@ -3,6 +3,9 @@ package co.com.samtel.service.impl;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -106,7 +109,7 @@ public class ControlAccesoOrdImpl implements IServiceControlAccesoOrd {
 					entity.getTblcodigoUsuario().getCodigo());
 
 			System.out.println(controlOrd.size());
-			
+
 			if (controlOrd.size() < 2) {
 
 				controlAccesoOrd.save(entity);
@@ -121,14 +124,13 @@ public class ControlAccesoOrdImpl implements IServiceControlAccesoOrd {
 		}
 
 	}
-	
-	
+
 	@Override
 	public List<String> countDate() {
 		// TODO Auto-generated method stub
 		return controlAccesoOrd.countDate();
 	}
-	
+
 	@Override
 	public List<Integer> usersDate(String fecha) {
 		// TODO Auto-generated method stub
@@ -141,19 +143,44 @@ public class ControlAccesoOrdImpl implements IServiceControlAccesoOrd {
 		return controlAccesoOrd.registroUsers(fecha, codigo);
 	}
 
+	public Time getTimepo(Time tm) {
+
+		Time tiempo = null;
+		Time res = tm;
+
+		if (res.getHours() < 1) {
+			tiempo = tm;
+			System.out.println("ESTE TIENE UN VALOR MENOR QUE  0" + tiempo);
+		} else {
+
+			int h = res.getHours() - 1;
+			int m = res.getMinutes();
+			int s = res.getSeconds();
+			LocalTime timeConv = LocalTime.of(h, m, s);
+			Time tt = Time.valueOf(timeConv);
+			tiempo = tt;
+
+			System.out.println("ESTE TIENE UN VALOR MAYOR - ORIGINAL = " + res + "- RESULTADO = " + tiempo);
+		}
+
+		return tiempo;
+	}
+
 	@Override
-	public ControlDiarioDto controlDia(String fecha ,  int codigo ) {
-		
-		 System.out.println("la fecha y el usuario es: " + fecha +"---" + codigo);
+	public ControlDiarioDto controlDia(String fecha, int codigo) {
+
+		System.out.println("la fecha y el usuario es: " + fecha + "---" + codigo);
 		List<Object[]> obj = (List<Object[]>) controlAccesoOrd.controlDia(fecha, codigo);
 		ControlDiarioDto controlD = null;
-		
+
 		for (Object[] ob : obj) {
-			
-			controlD = new ControlDiarioDto((Time)ob[0], (Time)ob[1], (Time)ob[2]);
-			
+
+			Time tiempo = getTimepo((Time) ob[2]);
+
+			controlD = new ControlDiarioDto((Time) ob[0], (Time) ob[1], tiempo);
+
 		}
-	
+
 		return controlD;
 	}
 }

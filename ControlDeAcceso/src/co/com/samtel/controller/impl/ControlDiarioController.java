@@ -111,44 +111,43 @@ public class ControlDiarioController implements IControlDiarioController {
 	}
 
 	@Override
-	public List<ControlDiarioAlertaDto> convertEntity() {
+	public List<ControlDiarioAlertaDto> convertEntityMenorH() {
 
-		
 		List<ControlDiarioAlertaDto> controlAlertas = new ArrayList<ControlDiarioAlertaDto>();
-		
-		
+
 		try {
 
 			SimpleDateFormat format = new SimpleDateFormat("hh:mm"); // if 24 hour format
 			Date d1;
 			Time ppstime;
-			
 
 			d1 = (java.util.Date) format.parse("09:00:00");
 
 			ppstime = new java.sql.Time(d1.getTime());
 
-			System.out.println(d1);
-			System.out.println(ppstime);
+			// System.out.println(d1);
+			// System.out.println(ppstime);
 
 			List<ControlDiario> controlD = getControlDiarioService().findAll();
 			String alerta = "";
+			ControlDiarioAlertaDto controlDA = null;
 			for (ControlDiario controlDiario : controlD) {
-				if (controlDiario.getTiempo().getHours() < 9) {
+				if (controlDiario.getTiempo().getHours() < 9 ) {
 					alerta = "EL USUARIO NO CUMPLE CON LAS 9 HORAS ESTABLECIDAS";
 					// System.out.println("EL usuario :" + controlDiario.getNombre() + " no cumplio
 					// las 9 horas correspondietes");
+					controlDA = new ControlDiarioAlertaDto(controlDiario.getFecha().toString(),
+							String.valueOf(controlDiario.getCodigoUsuario()), controlDiario.getNombre(),
+							controlDiario.getEntrada().toString(), controlDiario.getSalida().toString(),
+							controlDiario.getTiempo().toString(), alerta);
+					controlAlertas.add(controlDA);
 
 				} else {
 					alerta = "";
 				}
 
-				ControlDiarioAlertaDto controlDA = new ControlDiarioAlertaDto(controlDiario.getFecha().toString(),
-						String.valueOf(controlDiario.getCodigoUsuario()), controlDiario.getNombre(),
-						controlDiario.getEntrada().toString(), controlDiario.getSalida().toString(),
-						controlDiario.getTiempo().toString(), alerta);
-				 System.out.println(controlDA.toString());
-				controlAlertas.add(controlDA);
+				// System.out.println(controlDA.toString());
+				
 			}
 
 			return controlAlertas;
@@ -162,4 +161,63 @@ public class ControlDiarioController implements IControlDiarioController {
 		return controlAlertas;
 	}
 
-}
+	@Override
+	public List<ControlDiarioAlertaDto> convertEntityMayorH() {
+		List<ControlDiarioAlertaDto> controlAlertas = new ArrayList<ControlDiarioAlertaDto>();
+		List<ControlDiario> controlD = getControlDiarioService().findAll();
+		String alerta = "";
+		
+		ControlDiarioAlertaDto controlDA = null;
+		for (ControlDiario controlDiario : controlD) {
+			if (controlDiario.getTiempo().getHours() >= 9) {
+				alerta = "EL USUARIO COLABORO CON MAS DE LAS 9 HORAS ESTABLECIDAS ";
+				// System.out.println("EL usuario :" + controlDiario.getNombre() + " no cumplio
+				// las 9 horas correspondietes");
+				controlDA = new ControlDiarioAlertaDto(controlDiario.getFecha().toString(),
+						String.valueOf(controlDiario.getCodigoUsuario()), controlDiario.getNombre(),
+						controlDiario.getEntrada().toString(), controlDiario.getSalida().toString(),
+						controlDiario.getTiempo().toString(), alerta);
+				
+				controlAlertas.add(controlDA);
+			}
+
+			
+		}
+
+		return controlAlertas;
+	}
+
+	@Override
+	public List<ControlDiarioAlertaDto> convertEntityHoraLlegada() {
+		
+		List<ControlDiarioAlertaDto> controlAlertas = new ArrayList<ControlDiarioAlertaDto>();
+		List<ControlDiario> controlD = getControlDiarioService().findAll();
+		String alerta = "";
+		
+		ControlDiarioAlertaDto controlDA = null;
+		for (ControlDiario controlDiario : controlD) {
+			if (controlDiario.getEntrada().getHours() >= 8  && controlDiario.getEntrada().getMinutes() > 15) {
+				alerta = "LA HORA DE ENTRADA ES MAYOR A LAS  8:00 AM ";
+				// System.out.println("EL usuario :" + controlDiario.getNombre() + " no cumplio
+				// las 9 horas correspondietes");
+				controlDA = new ControlDiarioAlertaDto(controlDiario.getFecha().toString(),
+						String.valueOf(controlDiario.getCodigoUsuario()), controlDiario.getNombre(),
+						controlDiario.getEntrada().toString(), controlDiario.getSalida().toString(),
+						controlDiario.getTiempo().toString(), alerta);
+				
+				controlAlertas.add(controlDA);
+			}
+
+			
+		}
+
+		return controlAlertas;
+	}
+	
+	
+	
+	
+	
+	
+
+} // fin de la clase

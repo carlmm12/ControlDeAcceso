@@ -19,5 +19,7 @@ public interface IControlDiarioController {
 	IServiceCodigoUsuario getCodigoUsuarioService();
 	void alarmaControlDiario();
 	Date convertToDate(String date ) ;
-    List<ControlDiarioAlertaDto> convertEntity();
+    List<ControlDiarioAlertaDto> convertEntityMenorH();
+    List<ControlDiarioAlertaDto> convertEntityMayorH();
+    List<ControlDiarioAlertaDto> convertEntityHoraLlegada();
 }

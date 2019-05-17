@@ -25,7 +25,7 @@ public class ControlDiarioDto {
 		super();
 		this.entrada = entrada;
 		this.salida = salida;
-		this.tiempo = tiempo;
+		this.tiempo = tiempo ;
 	}
 
 
