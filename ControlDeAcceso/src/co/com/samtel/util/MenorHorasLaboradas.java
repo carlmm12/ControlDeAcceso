@@ -30,45 +30,7 @@ public class MenorHorasLaboradas {
 
 	}
 
-	/*
-	 * metodo para crear la carpeta en caso de que no exista
-	 */
-
-	public void createDirec() {
-		// System.out.println(new File(".").getAbsolutePath());
-		String desktopPath = System.getProperty("user.home") + "/Desktop";
-
-		desktopPath = desktopPath.replace("\\", "/");
-		File folder = new File(desktopPath + "/Reportes");
-
-		if (!folder.exists()) {
-			System.out.println("Creando la carpeta");
-			folder.mkdir();
-			System.out.println(folder.getAbsolutePath());
-		} else {
-			System.out.println("No se pudo crear la carpeta por que ya existe");
-		}
-	}
-
-	/*
-	 * METODO QUE ME GENERA EL NOMBRE DEL ARCHIVO EXCEL CON LA FECHA DE ACTUAL Y
-	 * DEVUELVA UN STRING CON EL NOMBRE DE LA RUTA Y EL NOMBRE DEL ARCHIVO
-	 */
-
-	public String createFileName(String nombre) {
-		Date date = new Date();
-		DateFormat fecha = new SimpleDateFormat("yyyy-MM-dd");
-		String convertido = fecha.format(date);
-		System.out.println(convertido);
-
-		String nameFile = "ControlAcceso_" + nombre + "_" + convertido + ".xlsx";
-		String rute = System.getProperty("user.home") + "/Desktop/Reportes/";
-		rute = rute.replace("\\", "/");
-		String foldR = rute + nameFile;
-		System.out.println(rute);
-		System.out.println(foldR);
-		return foldR;
-	}
+	
 
 	/*
 	 * metodo que me permite traer la ruta especifica del proyecto
@@ -79,11 +41,11 @@ public class MenorHorasLaboradas {
 
 			// llamado al metodo que me permite generar la carpeta o verificar si se
 			// encuentra disponible
-			createDirec();
+			folderVerify.createDirec();
 
 			// llamdo al metodo que me genera el nombre del archivo a y ala vez la ruta a la
 			// carpeta donde se creara el reporte
-			String fileName = createFileName("Menor_numero_Horas");
+			String fileName = folderVerify.createFileName("Menor_numero_Horas");
 
 			// creacion del archivo de excel para el reporte
 			Workbook book = new XSSFWorkbook();

@@ -43,10 +43,6 @@ public class Test {
 
 	public static void main(String[] args) throws ParseException {
 
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-		Date date = formatter.parse("2019-04-01 18:57:42");
-		System.out.println(new Timestamp(date.getTime()));
-
 		
 		
 		//--------------------------------------------------------------------------------------------------------
@@ -113,7 +109,7 @@ public class Test {
 		
 		
 			// -------------------------------------------------------------------------------------------------------
-		    // METODO QUE ME PERMITIRA CRAER EL REPORTE CON LAS ALERTAS (CANTIDAD DE USUARIOS QUE LLEGAN TARDE AL TARBAJO)
+		    // METODO QUE ME PERMITIRA CRAER EL REPORTE CON LAS ALERTAS (CANTIDAD DE USUARIOS QUE LLEGAN TARDE AL TRABAJO)
 
 			// 1. llamdo al metodo para cargar el dto con regferencia al control diario de
 			// las alertas por llegada tarde.
@@ -127,9 +123,7 @@ public class Test {
 					
 			//-------------------------------------------------------------------------------------------------------------
 				
-			
-		
-		
+	
 
 	}
 
