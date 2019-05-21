@@ -7,12 +7,14 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import co.com.samtel.dto.ControlDiarioDto;
 import co.com.samtel.entities.ControlAcceso;
 import co.com.samtel.entities.ControlAccesosOrd;
 import co.com.samtel.entities.ControlAccesosOrdPK;
 
+@Repository
 public interface IcontrolAcessoOrd  extends JpaRepository<ControlAccesosOrd, Integer>{
 
 	/*
@@ -64,6 +66,19 @@ public interface IcontrolAcessoOrd  extends JpaRepository<ControlAccesosOrd, Int
 	
 	@Query(value="SELECT MIN(TIME(fecha)) AS entrada, max(TIME(fecha)) AS salida, TIMEDIFF(TIMEDIFF(MAX(fecha), MIN(fecha)) , '01:00:00') AS tiempo  FROM tblcontrol_accesos_ord  WHERE DAte(fecha) = :fecha AND tblcodigo_usuarios_codigo = :codigo", nativeQuery = true )
 	public List<Object[]> controlDias(@Param("fecha") String fecha , @Param("codigo") int codigo );
+	
+	/*
+	 * query que me trae una lista de fechas de acuerdo a el rango de busqueda  (mes, dia incial ,dia final)
+	 * 
+	 */
+	@Query(value="SELECT   DATE(fecha) AS fechas FROM tblcontrol_accesos_ord  WHERE MONTH(DATE(fecha)) = :mes  AND YEAR(DATE(fecha)) = :year AND DAY(DATE(fecha))  BETWEEN  :diaI AND  :diaF  GROUP BY fechas;", nativeQuery = true )
+	public List<String> controlDiasR(@Param("mes") int mes ,@Param("year") int year , @Param("diaI") int diaI ,@Param("diaF") int diaF );
+	
+	/*
+	 * query que me trae una lista de fechas de acuerdo a el rango de busqueda  ( dia incial ,dia final)
+	 */
+	@Query(value="SELECT   DATE(fecha) AS fechas FROM tblcontrol_accesos_ord  WHERE DAY(DATE(fecha))  BETWEEN  :diaI AND  :diaF  GROUP BY fechas;", nativeQuery = true )
+	public List<String> controlDiasR1( @Param("diaI") int diaI ,@Param("diaF") int diaF );
 	
 	
 }

@@ -16,5 +16,7 @@ public interface IServiceControlAccesoOrd extends IServiceRepo<ControlAccesosOrd
 	List<Integer> usersDate( String fecha);
 	List<ControlAccesosOrd> registroUsers(String fecha , int codigo );
 	ControlDiarioDto controlDia(String fecha ,  int codigo );
+	List<String> controlDiasR(int mes , int year, int diaI ,int diaF );
+	List<String> controlDiasR1( int diaI ,int diaF );
 	
 }

@@ -18,6 +18,7 @@ import co.com.samtel.service.IServiceCodigoUsuario;
 import co.com.samtel.service.IServiceControlAccesoOrd;
 import co.com.samtel.service.IServiceControlDiario;
 import co.com.samtel.util.BeanUtil;
+import co.com.samtel.util.convertDate;
 
 public class ControlDiarioController implements IControlDiarioController {
 
@@ -56,20 +57,24 @@ public class ControlDiarioController implements IControlDiarioController {
 		}
 		return conAccOrdService;
 	}
+	
+	
 
-	@Override
-	public Date convertToDate(String date) {
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-		Date converDate;
-		try {
-			converDate = formatter.parse(date);
-			return converDate;
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
-	}
+//	@Override
+//	public Date convertToDate(String date) {
+//		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+//		Date converDate;
+//		try {
+//			converDate = formatter.parse(date);
+//			return converDate;
+//		} catch (ParseException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		return null;
+//	}
+	
+	
 
 	/*
 	 * Este metodo es la alarma de horas que se realiza por día se tomada por dia
@@ -98,7 +103,7 @@ public class ControlDiarioController implements IControlDiarioController {
 
 				// asignación de valores a el control de dia lista para registrar
 				ControlDiario controlDia = new ControlDiario(getControlDiarioService().countC() + 1,
-						codigoUser.getCodigo(), controlDto.getEntrada(), convertToDate(fechasDia),
+						codigoUser.getCodigo(), controlDto.getEntrada(), convertDate.convertToDate(fechasDia),
 						codigoUser.getTblusuario().getNombre(), controlDto.getSalida(), controlDto.getTiempo());
 				System.out.println(controlDia.toString());
 

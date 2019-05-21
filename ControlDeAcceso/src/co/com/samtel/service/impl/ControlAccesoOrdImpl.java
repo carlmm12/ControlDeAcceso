@@ -183,4 +183,16 @@ public class ControlAccesoOrdImpl implements IServiceControlAccesoOrd {
 
 		return controlD;
 	}
+
+	@Override
+	public List<String> controlDiasR(int mes, int year, int diaI, int diaF) {
+		
+		return controlAccesoOrd.controlDiasR(mes,year, diaI, diaF);
+	}
+
+	@Override
+	public List<String> controlDiasR1( int diaI, int diaF) {
+		// TODO Auto-generated method stub
+		return controlAccesoOrd.controlDiasR1(diaI, diaF);
+	}
 }
