@@ -78,11 +78,77 @@ public class MayorHoraEntrada {
 			// SE HACE UN CICLO PARA REGISTRAR EN UNA MISMA FILA LOS TITULOS DE LA
 			// INFORMACIÓN.
 
-			// Row titulos = sheet.createRow(0);
-			// Cell titulo = titulos.createCell(0);
-			// titulo.setCellStyle(tituloEstilo);
-			// titulo.setCellValue("FECHA");
+			
+			// SE CREA EL TITULO BASE PARA LA HOJA NUMERO 1 CON EL NOMBRE DE RESUMEN RETARDOS 
+			
+			String[] tituloResumen = new String[] { "FECHA", "CODIGO USUARIO", "NOMBRE", "NUMERO ALERTAS", "PORCENTAJE DE ALERTAS", "TOTAL DIAS" };
+			Row titulosResumen = sheet1.createRow(0);
+			
+			for (int i = 0; i < tituloResumen.length; i++) {
+				Cell titulo = titulosResumen.createCell(i);
+				titulo.setCellStyle(tituloEstilo);
+				titulo.setCellValue(tituloResumen[i]);
+				sheet1.autoSizeColumn(i);
 
+			}
+			
+			// carga de datos en la hoja 1 (resumen retardos)
+			
+			int numColRes = 6;
+			int countRes = 0;
+			
+			for (ResumenMensual resumen : resumenesMen) {
+				
+
+				countRes++;
+				if (countRes <= resumenesMen.size()) {
+					Row resMen = sheet1.createRow(countRes);
+
+					for (int i = 0; i < numColRes; i++) {
+
+						Cell cellDataRes = resMen.createCell(i);
+						switch (i) {
+
+						case 0:
+							cellDataRes.setCellValue(resumen.getFecha().toString());
+							
+							break;
+						case 1:
+							cellDataRes.setCellValue( resumen.getId().getCodigo());
+							
+							break;
+						case 2:
+							cellDataRes.setCellValue(resumen.getUsuario());
+							
+							break;
+						case 3:
+							cellDataRes.setCellValue(resumen.getNroAlertas());
+							
+							break;
+						case 4:
+							cellDataRes.setCellValue(resumen.getPorcentajeAlertas());
+							
+							break;
+						case 5:
+							cellDataRes.setCellValue(resumen.getTotalDias());
+							
+							break;
+
+						}
+						sheet1.autoSizeColumn(i);
+					}
+
+				}
+				
+				
+				
+			} // fin del recorrido de la lista de la entidad ResumenesMensuales
+			
+			
+
+			
+			// SE CREA EL TITULO BASE PARA LA HOJA NUMERO 2 CON EL NOMBRE DE RETARDOS 
+			
 			String[] tituloHead = new String[] { "FECHA", "CODIGO USUARIO", "NOMBRE", "ENTRADA", "ALERTAS HORAS TRABAJADAS" };
 			Row titulos = sheet.createRow(0);
 
@@ -90,6 +156,7 @@ public class MayorHoraEntrada {
 				Cell titulo = titulos.createCell(i);
 				titulo.setCellStyle(tituloEstilo);
 				titulo.setCellValue(tituloHead[i]);
+				sheet.autoSizeColumn(i);
 
 			}
 
@@ -111,21 +178,27 @@ public class MayorHoraEntrada {
 
 						case 0:
 							cellData.setCellValue(controlD.getFecha());
+							
 							break;
 						case 1:
-							cellData.setCellValue(controlD.getCodigo());
+							cellData.setCellValue( Integer.parseInt(controlD.getCodigo()));
+							
 							break;
 						case 2:
 							cellData.setCellValue(controlD.getNombre());
+							
 							break;
 						case 3:
 							cellData.setCellValue(controlD.getEntrada());
+							
 							break;
 						case 4:
 							cellData.setCellValue(controlD.getAlerta());
+							
 							break;
 
 						}
+						sheet.autoSizeColumn(i);
 					}
 
 				}
@@ -138,6 +211,8 @@ public class MayorHoraEntrada {
 
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
+			System.out.println("El arhivo esta abierto cierrelo e intente nuevamente");
+			
 			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

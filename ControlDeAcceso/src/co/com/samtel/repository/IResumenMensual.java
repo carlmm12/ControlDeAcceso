@@ -45,7 +45,7 @@ public interface IResumenMensual extends JpaRepository<ResumenMensual, Integer> 
 	/*
 	 *  Metodo que me trae todos la entidades de ResumenMensual de acuerdo al tipo de alerta.
 	 */
-	@Query("SELECT r FROM ResumenMensual r WHERE r.id.tipoAlerta = :tipoAlerta")
+	@Query("SELECT r FROM ResumenMensual r WHERE r.id.tipoAlerta = :tipoAlerta ORDER BY r.fecha, r.id.codigo")
 	List<ResumenMensual> findbyAlertType ( @Param("tipoAlerta") int tipoAlerta);
 	
 	
