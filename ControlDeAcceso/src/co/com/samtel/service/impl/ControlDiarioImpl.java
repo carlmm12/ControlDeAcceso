@@ -82,4 +82,10 @@ public class ControlDiarioImpl implements IServiceControlDiario {
 		return cdia.countC();
 	}
 
+	@Override
+	public List<ControlDiario> findAllRange(int mes, int year, int diaI, int diaF) {
+		// TODO Auto-generated method stub
+		return cdia.findAllRange(mes, year, diaI, diaF);
+	}
+
 }

@@ -19,7 +19,7 @@ public interface IControlDiarioController {
 	IServiceCodigoUsuario getCodigoUsuarioService();
 	void alarmaControlDiario();
 	
-    List<ControlDiarioAlertaDto> convertEntityMenorH();
-    List<ControlDiarioAlertaDto> convertEntityMayorH();
-    List<ControlDiarioAlertaDto> convertEntityHoraLlegada();
+    List<ControlDiarioAlertaDto> convertEntityMenorH(int mes, int year, int diaI,  int diaF);
+    List<ControlDiarioAlertaDto> convertEntityMayorH(int mes, int year, int diaI,  int diaF);
+    List<ControlDiarioAlertaDto> convertEntityHoraLlegada(int mes, int year, int diaI,  int diaF);
 }

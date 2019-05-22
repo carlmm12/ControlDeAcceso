@@ -57,8 +57,6 @@ public class ControlDiarioController implements IControlDiarioController {
 		}
 		return conAccOrdService;
 	}
-	
-	
 
 //	@Override
 //	public Date convertToDate(String date) {
@@ -73,8 +71,6 @@ public class ControlDiarioController implements IControlDiarioController {
 //		}
 //		return null;
 //	}
-	
-	
 
 	/*
 	 * Este metodo es la alarma de horas que se realiza por día se tomada por dia
@@ -115,8 +111,14 @@ public class ControlDiarioController implements IControlDiarioController {
 
 	}
 
+	/*
+	 * metodo que me devuele un lista de controlDiario DTO de acuerdo a un rango
+	 * especifico y si el usuario no cumple con las 9 horas estipuladas por la
+	 * empresa
+	 */
+
 	@Override
-	public List<ControlDiarioAlertaDto> convertEntityMenorH() {
+	public List<ControlDiarioAlertaDto> convertEntityMenorH(int mes, int year, int diaI, int diaF) {
 
 		List<ControlDiarioAlertaDto> controlAlertas = new ArrayList<ControlDiarioAlertaDto>();
 
@@ -133,18 +135,27 @@ public class ControlDiarioController implements IControlDiarioController {
 			// System.out.println(d1);
 			// System.out.println(ppstime);
 
-			List<ControlDiario> controlD = getControlDiarioService().findAll();
+			// Llamado al metodo que me trae todos los datos de la tabla tblcontrol_diario
+			// de acuerdo al rango (mes, año, dia inicial , dia final)
+			List<ControlDiario> controlD = getControlDiarioService().findAllRange(mes, year, diaI, diaF);
+
 			String alerta = "";
+
 			ControlDiarioAlertaDto controlDA = null;
 			for (ControlDiario controlDiario : controlD) {
-				if (controlDiario.getTiempo().getHours() < 9 ) {
+				if (controlDiario.getTiempo().getHours() < 9) {
 					alerta = "EL USUARIO NO CUMPLE CON LAS 9 HORAS ESTABLECIDAS";
 					// System.out.println("EL usuario :" + controlDiario.getNombre() + " no cumplio
 					// las 9 horas correspondietes");
+
+					// se carga el DTO solo si el usuario no cumple con las horas establecidas
 					controlDA = new ControlDiarioAlertaDto(controlDiario.getFecha().toString(),
 							String.valueOf(controlDiario.getCodigoUsuario()), controlDiario.getNombre(),
 							controlDiario.getEntrada().toString(), controlDiario.getSalida().toString(),
 							controlDiario.getTiempo().toString(), alerta);
+
+					// Se agrega a la lista de controlDiarioalertaDTO para returnarlo para generar
+					// el reporte
 					controlAlertas.add(controlDA);
 
 				} else {
@@ -152,7 +163,7 @@ public class ControlDiarioController implements IControlDiarioController {
 				}
 
 				// System.out.println(controlDA.toString());
-				
+
 			}
 
 			return controlAlertas;
@@ -166,63 +177,77 @@ public class ControlDiarioController implements IControlDiarioController {
 		return controlAlertas;
 	}
 
+	/*
+	 * metodo que me devuele un lista de controlDiario DTO de acuerdo a un rango
+	 * especifico y si el usuario coloboro con mas de 9 horas
+	 */
 	@Override
-	public List<ControlDiarioAlertaDto> convertEntityMayorH() {
+	public List<ControlDiarioAlertaDto> convertEntityMayorH(int mes, int year, int diaI, int diaF) {
+
 		List<ControlDiarioAlertaDto> controlAlertas = new ArrayList<ControlDiarioAlertaDto>();
-		List<ControlDiario> controlD = getControlDiarioService().findAll();
+		// Llamado al metodo que me trae todos los datos de la tabla tblcontrol_diario
+		// de acuerdo al rango (mes, año, dia inicial , dia final)
+		List<ControlDiario> controlD = getControlDiarioService().findAllRange(mes, year, diaI, diaF);
 		String alerta = "";
-		
+
 		ControlDiarioAlertaDto controlDA = null;
 		for (ControlDiario controlDiario : controlD) {
 			if (controlDiario.getTiempo().getHours() >= 9) {
 				alerta = "EL USUARIO COLABORO CON MAS DE LAS 9 HORAS ESTABLECIDAS ";
-				// System.out.println("EL usuario :" + controlDiario.getNombre() + " no cumplio
-				// las 9 horas correspondietes");
+
+				// se carga el DTO solo si el usuario colaboro con mas de 9 horas
 				controlDA = new ControlDiarioAlertaDto(controlDiario.getFecha().toString(),
 						String.valueOf(controlDiario.getCodigoUsuario()), controlDiario.getNombre(),
 						controlDiario.getEntrada().toString(), controlDiario.getSalida().toString(),
 						controlDiario.getTiempo().toString(), alerta);
+
 				
+				// Se agrega a la lista de controlDiarioalertaDTO para returnarlo para generar
+				// el reporte
 				controlAlertas.add(controlDA);
 			}
 
-			
 		}
 
 		return controlAlertas;
 	}
+
+	/*
+	 * metodo que me devuele un lista de controlDiario DTO de acuerdo a un rango
+	 * especifico y si el usuario entro con una hora mayor a la estipulada por la
+	 * empresa
+	 */
 
 	@Override
-	public List<ControlDiarioAlertaDto> convertEntityHoraLlegada() {
-		
+	public List<ControlDiarioAlertaDto> convertEntityHoraLlegada(int mes, int year, int diaI, int diaF) {
+
 		List<ControlDiarioAlertaDto> controlAlertas = new ArrayList<ControlDiarioAlertaDto>();
-		List<ControlDiario> controlD = getControlDiarioService().findAll();
+
+		// Llamado al metodo que me trae todos los datos de la tabla tblcontrol_diario
+		// de acuerdo al rango (mes, año, dia inicial , dia final)
+		List<ControlDiario> controlD = getControlDiarioService().findAllRange(mes, year, diaI, diaF);
 		String alerta = "";
-		
+
 		ControlDiarioAlertaDto controlDA = null;
 		for (ControlDiario controlDiario : controlD) {
-			if (controlDiario.getEntrada().getHours() >= 8  && controlDiario.getEntrada().getMinutes() > 15) {
+			if (controlDiario.getEntrada().getHours() >= 8 && controlDiario.getEntrada().getMinutes() > 15) {
 				alerta = "LA HORA DE ENTRADA ES MAYOR A LAS  8:00 AM ";
-				// System.out.println("EL usuario :" + controlDiario.getNombre() + " no cumplio
-				// las 9 horas correspondietes");
+
+				// se carga el DTO solo si el usuario llego tarde
 				controlDA = new ControlDiarioAlertaDto(controlDiario.getFecha().toString(),
 						String.valueOf(controlDiario.getCodigoUsuario()), controlDiario.getNombre(),
 						controlDiario.getEntrada().toString(), controlDiario.getSalida().toString(),
 						controlDiario.getTiempo().toString(), alerta);
+
 				
+				// Se agrega a la lista de controlDiarioalertaDTO para returnarlo para generar
+				// el reporte
 				controlAlertas.add(controlDA);
 			}
 
-			
 		}
 
 		return controlAlertas;
 	}
-	
-	
-	
-	
-	
-	
 
 } // fin de la clase

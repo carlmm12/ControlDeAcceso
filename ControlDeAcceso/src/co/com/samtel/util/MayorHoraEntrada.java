@@ -23,6 +23,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import co.com.samtel.dto.ControlDiarioAlertaDto;
+import co.com.samtel.entities.ResumenMensual;
 
 public class MayorHoraEntrada {
 
@@ -35,10 +36,12 @@ public class MayorHoraEntrada {
 	/*
 	 * metodo que me permite traer la ruta especifica del proyecto
 	 */
-	public void reporteHoraEntrada(List<ControlDiarioAlertaDto> controles) {
+	public void reporteHoraEntrada(List<ControlDiarioAlertaDto> controles, List<ResumenMensual> resumenesMen) {
 
 		try {
 
+			
+			
 			// llamado al metodo que me permite generar la carpeta o verificar si se
 			// encuentra disponible
 			folderVerify.createDirec();
@@ -50,7 +53,10 @@ public class MayorHoraEntrada {
 
 			// creacion del archivo de excel para el reporte
 			Workbook book = new XSSFWorkbook();
+			Sheet sheet1 = book.createSheet("Resumen_retardos");
 			Sheet sheet = book.createSheet("Retardos");
+			
+			
 
 			// LLENADO DEL ARCHIVO CON EL TITULO Y CON LOS DATOS QUE ME TRAE LA BASE DE
 			// DATOS.

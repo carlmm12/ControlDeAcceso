@@ -23,6 +23,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import co.com.samtel.dto.ControlDiarioAlertaDto;
+import co.com.samtel.entities.ResumenMensual;
 
 public class MenorHorasLaboradas {
 
@@ -35,7 +36,7 @@ public class MenorHorasLaboradas {
 	/*
 	 * metodo que me permite traer la ruta especifica del proyecto
 	 */
-	public void reporteMenorHorasLaboradas(List<ControlDiarioAlertaDto> controles) {
+	public void reporteMenorHorasLaboradas(List<ControlDiarioAlertaDto> controles, List<ResumenMensual> resumenesMen) {
 
 		try {
 

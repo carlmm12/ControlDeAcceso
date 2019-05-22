@@ -7,8 +7,6 @@ import java.util.List;
 import co.com.samtel.controller.IResumenMensualController;
 import co.com.samtel.dto.ControlDiarioDto;
 import co.com.samtel.entities.CodigoUsuario;
-import co.com.samtel.entities.ControlAccesosOrd;
-import co.com.samtel.entities.ControlDiario;
 import co.com.samtel.entities.ResumenMensual;
 import co.com.samtel.entities.ResumenMensualPK;
 import co.com.samtel.service.IServiceCodigoUsuario;
@@ -63,11 +61,14 @@ public class ResumenMensualController implements IResumenMensualController {
 
 		System.out.println(fechasDia);
 
+		// se hace un parse de la fecha que viene en formato COT para que aparezca en forma UTC separado por guiones
 		LocalDate fec = convertDate.converToDat(fechasDia);
-
+		
+        
 		int mes = fec.getMonthValue();
 		int year = fec.getYear();
 
+		// se hace una busqueda de la cantidad de registros que existen de acuerdo al codigo de usuaro, el tipo de alerta, el mes y el año
 		int nroAlertas = getResumenMensualServices().findnumAlertas(codUser, mes, year, tipAlerta);
 		System.out.println(nroAlertas);
 
@@ -75,10 +76,11 @@ public class ResumenMensualController implements IResumenMensualController {
 		// rango estipulado
 		int porcentajeAlertas = 0;
 
+		
+		// si entra al metodo se le agrega uno más para poder registrar el alerta. 
 		nroAlertas = nroAlertas + 1;
 
-		// verificar que el porcentaje de de acuerdo a lo que se plante en el informe
-		// general
+		// Se realiza el porcentaje de acuerdo al numero de días y como 100 % el total de diás 
 		porcentajeAlertas = (nroAlertas* 100) / totaldias ;
 
 		System.out.println(porcentajeAlertas);
@@ -95,9 +97,8 @@ public class ResumenMensualController implements IResumenMensualController {
 		// cero lo insertamos debido
 		// a que no esta registrado ningun dato aparente en la base de datos y por el
 		// otro lado de ser mayor a cero
-		// lo actualizamos con el fin que por mes solo quede un registro de acuerdo a la
-		// alerta.
-
+		// lo actualizamos con el fin que por mes solo quede un registro por alerta
+		
 		if (nroAlertas == 1) {
 
 			getResumenMensualServices().save(resMen);
@@ -110,6 +111,10 @@ public class ResumenMensualController implements IResumenMensualController {
 
 	}
 
+	
+	
+	
+	
 	/*
 	 * metoo que me permite registrar en la tabla tblresumenes_mensual la informació
 	 * pertienende resumida por cada una de las alertas, para este metodo es
@@ -121,9 +126,16 @@ public class ResumenMensualController implements IResumenMensualController {
 	@Override
 	public void resumenMenRegisterR(int mes, int year, int diaI, int diaF) {
 
+		
+		// ELIMINAR LOS REGISTROS DE ACUERDO AL MES Y A LA FECHA PARA QUE NO SE GENERE UN CONTEO CON DATOS YA REGISTRADOS
+		
+		 getResumenMensualServices().deleteRegistros(mes, year);
+		
 		// lamado a todas las fechas registradas en la tabla controlAccessoOrd
 		List<String> fechas = getControlAccesoOrdService().controlDiasR(mes, year, diaI, diaF);
 
+		
+		// se valida que las fechas sean mayor a 0 para poder ejecutar el procedimiento de almacenado y de actualización
 		if (fechas.size() > 0) {
 			// total de dias laborados en la empresa
 			int totaldias = fechas.size();
@@ -187,6 +199,12 @@ public class ResumenMensualController implements IResumenMensualController {
 	public void resumenMenRegisterR1(int diaI, int diaF) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public List<ResumenMensual> ResumenEntity(int tipoAlerta) {
+		
+		return getResumenMensualServices().findbyAlertType(tipoAlerta);
 	}
 
 }

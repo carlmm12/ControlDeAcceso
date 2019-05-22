@@ -10,5 +10,7 @@ import co.com.samtel.entities.ControlDiario;
 public interface IServiceControlDiario extends IServiceRepo<ControlDiario,Integer> {
 	
 	int countC();
+	List<ControlDiario> findAllRange( int mes, int year, int diaI,  int diaF);
+	
 
 }

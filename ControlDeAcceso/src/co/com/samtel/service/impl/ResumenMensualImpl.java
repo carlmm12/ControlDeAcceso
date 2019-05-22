@@ -95,6 +95,22 @@ public class ResumenMensualImpl implements IServiceResumenMensual {
 		
 	}
 
+	@Override
+	public void deleteRegistros(int mes, int year) {
+		try {
+			rmen.deleteRegistros(mes, year);
+		} catch (Exception e) {
+			System.out.println("Error al intenta eliminar los registros con el año:" + year + " y el mes: " + mes);
+		}
+		
+	}
+
+	@Override
+	public List<ResumenMensual> findbyAlertType(int tipoAlerta) {
+		
+		return rmen.findbyAlertType(tipoAlerta);
+	}
+
 
 
 }

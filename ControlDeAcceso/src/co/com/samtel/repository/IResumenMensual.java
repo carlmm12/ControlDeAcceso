@@ -18,14 +18,35 @@ import co.com.samtel.entities.ResumenMensual;
 public interface IResumenMensual extends JpaRepository<ResumenMensual, Integer> {
 
 	
+	/*
+	 * Metodo que me permite buscar la cantidad de alertas que existe de acuerdo al tipo de usuario y el tipo de alerta que se presente.
+	 */
 	@Query(value="SELECT  nro_alertas FROM tblresumenes_mensual WHERE codigo = :codigo AND MONTH(DATE(fecha)) = :mes AND YEAR(DATE(fecha)) = :year AND tipo_alerta = :tp", nativeQuery=true)
 	Integer findnumAlertas ( @Param("codigo") int codigo, @Param("mes") int mes,@Param("year") int year ,@Param("tp") int tipoAlerta);
 	
+	
+	/*
+	 * metodo que me permite actualizar los datos almacenados por cada alerta que se presente.
+	 */
 	@Modifying
 	@Query(value="UPDATE tblresumenes_mensual SET  nro_alertas= :numalertas, porcentaje_alertas= :porcentaje WHERE codigo= :codigo AND MONTH(DATE(fecha)) = :mes AND tipo_alerta = :tp", nativeQuery=true)
 	@Transactional
 	void updateEntity ( @Param("numalertas") int numalertas, @Param("porcentaje") int porcentaje,@Param("codigo") int codigo,  @Param("mes") int mes, @Param("tp") int tp);
 	
+	/*
+	 * Metodo que me permite eliminar lso registros anteriores 
+	 */
+	
+	@Modifying
+	@Query(value="DELETE FROM tblresumenes_mensual WHERE   MONTH(DATE(fecha)) = :mes AND YEAR(DATE(fecha)) = :year", nativeQuery=true)
+	@Transactional
+	void deleteRegistros ( @Param("mes") int mes, @Param("year") int year);
+	
+	/*
+	 *  Metodo que me trae todos la entidades de ResumenMensual de acuerdo al tipo de alerta.
+	 */
+	@Query("SELECT r FROM ResumenMensual r WHERE r.id.tipoAlerta = :tipoAlerta")
+	List<ResumenMensual> findbyAlertType ( @Param("tipoAlerta") int tipoAlerta);
 	
 	
 }
