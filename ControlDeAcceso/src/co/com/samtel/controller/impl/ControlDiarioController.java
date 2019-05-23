@@ -14,6 +14,7 @@ import co.com.samtel.dto.ControlDiarioDto;
 import co.com.samtel.entities.CodigoUsuario;
 import co.com.samtel.entities.ControlDiario;
 import co.com.samtel.entities.Usuario;
+import co.com.samtel.properties.ListenProperties;
 import co.com.samtel.service.IServiceCodigoUsuario;
 import co.com.samtel.service.IServiceControlAccesoOrd;
 import co.com.samtel.service.IServiceControlDiario;
@@ -25,6 +26,7 @@ public class ControlDiarioController implements IControlDiarioController {
 	private IServiceControlDiario conAccDiarService;
 	private IServiceControlAccesoOrd conAccOrdService;
 	private IServiceCodigoUsuario codUserService;
+	private ListenProperties prop = new ListenProperties();
 
 	@Override
 	public IServiceControlDiario getControlDiarioService() {
@@ -143,7 +145,7 @@ public class ControlDiarioController implements IControlDiarioController {
 
 			ControlDiarioAlertaDto controlDA = null;
 			for (ControlDiario controlDiario : controlD) {
-				if (controlDiario.getTiempo().getHours() < 9) {
+				if (controlDiario.getTiempo().getHours() < prop.getHorasLaboradas()) {
 					alerta = "EL USUARIO NO CUMPLE CON LAS 9 HORAS ESTABLECIDAS";
 					// System.out.println("EL usuario :" + controlDiario.getNombre() + " no cumplio
 					// las 9 horas correspondietes");
@@ -192,7 +194,7 @@ public class ControlDiarioController implements IControlDiarioController {
 
 		ControlDiarioAlertaDto controlDA = null;
 		for (ControlDiario controlDiario : controlD) {
-			if (controlDiario.getTiempo().getHours() >= 9) {
+			if (controlDiario.getTiempo().getHours() >= prop.getHoraExtra() && controlDiario.getTiempo().getMinutes() > prop.getMinutosExtra() ) {
 				alerta = "EL USUARIO COLABORO CON MAS DE LAS 9 HORAS ESTABLECIDAS ";
 
 				// se carga el DTO solo si el usuario colaboro con mas de 9 horas
@@ -230,8 +232,8 @@ public class ControlDiarioController implements IControlDiarioController {
 
 		ControlDiarioAlertaDto controlDA = null;
 		for (ControlDiario controlDiario : controlD) {
-			if (controlDiario.getEntrada().getHours() >= 8 && controlDiario.getEntrada().getMinutes() > 15) {
-				alerta = "LA HORA DE ENTRADA ES MAYOR A LAS  8:00 AM ";
+			if (controlDiario.getEntrada().getHours() >= prop.getHoraEntrada() && controlDiario.getEntrada().getMinutes() > prop.getMinutosEntrada()) {
+				alerta = "LA HORA DE ENTRADA ES MAYOR A LAS " + prop.getHoraEntrada() +":"+ prop.getMinutosEntrada() + " AM";
 
 				// se carga el DTO solo si el usuario llego tarde
 				controlDA = new ControlDiarioAlertaDto(controlDiario.getFecha().toString(),

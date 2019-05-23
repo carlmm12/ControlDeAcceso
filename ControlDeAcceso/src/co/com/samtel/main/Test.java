@@ -1,22 +1,6 @@
 package co.com.samtel.main;
 
-import java.sql.Time;
-import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.TimeZone;
-import java.util.Timer;
-
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import com.mysql.jdbc.log.Log;
 
 import co.com.samtel.controller.IControlAccesoOrdController;
 import co.com.samtel.controller.IControlAccessoController;
@@ -30,11 +14,8 @@ import co.com.samtel.controller.impl.ResumenMensualController;
 import co.com.samtel.controller.impl.UserController;
 import co.com.samtel.dto.ControlDiarioAlertaDto;
 import co.com.samtel.entities.ResumenMensual;
-import co.com.samtel.entities.Usuario;
-import co.com.samtel.repository.IControlDiario;
-import co.com.samtel.service.IServiceUsuario;
+import co.com.samtel.properties.ListenProperties;
 import co.com.samtel.util.MenorHorasLaboradas;
-import co.com.samtel.util.BeanUtil;
 import co.com.samtel.util.MayorHoraEntrada;
 import co.com.samtel.util.MayorHorasLaboradas;
 
@@ -48,12 +29,12 @@ public class Test {
 	public static MayorHorasLaboradas mayorHL = new MayorHorasLaboradas();
 	public static MayorHoraEntrada retardos = new MayorHoraEntrada();
 	public static IResumenMensualController rm = new ResumenMensualController();
-
-	public static void main(String[] args) throws ParseException {
+    public static ListenProperties prop = new ListenProperties();
+    
+    
+	public static void main(String[] args)  {
 		
-		System.out.println("${carl}");
-
-		int mes = 4;
+	    int mes = 4;
 		int year = 2019;
 		int diaI = 1;
 		int diaF = 2;
@@ -100,20 +81,20 @@ public class Test {
 		// --------------------------------------------------------------------------------------------------------->
 
 		// -------------------------------------------------------------------------------------------------------
-		// METODO QUE ME PERMITIRA CRAER EL REPORTE CON LAS ALERTAS (MENOR CANTIDAD DE
+		// METODO QUE ME PERMITIRA CREAR EL REPORTE CON LAS ALERTAS (MENOR CANTIDAD DE
 		// HORAS LABORADAS)
 
 		// 1. llamdo al metodo para cargar el dto con regferencia al control diario de
 		// las alertas.
 
-		List<ControlDiarioAlertaDto> controlMenorHoras = cdi.convertEntityMenorH(mes, year, diaI, diaF);
-		List<ResumenMensual> resumenesmH = rm.ResumenEntity(2);
-		System.out.println(resumenesmH.size());
-		System.out.println(controlMenorHoras.size());
+		//List<ControlDiarioAlertaDto> controlMenorHoras = cdi.convertEntityMenorH(mes, year, diaI, diaF);
+		//List<ResumenMensual> resumenesmH = rm.ResumenEntity(2);
+		//System.out.println(resumenesmH.size());
+		//System.out.println(controlMenorHoras.size());
 
 		// 2. llamado al metodo que me generara el archivo excel.
 
-		menorHL.reporteMenorHorasLaboradas(controlMenorHoras, resumenesmH);
+		//menorHL.reporteMenorHorasLaboradas(controlMenorHoras, resumenesmH);
 
 		// ------------------------------------------------------------------------------------------------------------->
 
@@ -124,14 +105,14 @@ public class Test {
 		// 1. llamdo al metodo para cargar el dto con regferencia al control diario de
 		// las alertas.
 
-		 List<ControlDiarioAlertaDto> controlMayorHoras = cdi.convertEntityMayorH(mes, year, diaI, diaF);
-		List<ResumenMensual> resumenesMh = rm.ResumenEntity(3);
-		System.out.println(resumenesMh.size());
-		System.out.println(controlMayorHoras.size());
+		//List<ControlDiarioAlertaDto> controlMayorHoras = cdi.convertEntityMayorH(mes, year, diaI, diaF);
+		//List<ResumenMensual> resumenesMh = rm.ResumenEntity(3);
+		//System.out.println(resumenesMh.size());
+		//System.out.println(controlMayorHoras.size());
 
 		// 2. llamado al metodo que me generara el archivo excel.
 
-		mayorHL.reporteMayorHorasLaboradas(controlMayorHoras, resumenesMh);
+		//mayorHL.reporteMayorHorasLaboradas(controlMayorHoras, resumenesMh);
 
 		// ------------------------------------------------------------------------------------------------------------->
 
@@ -144,13 +125,13 @@ public class Test {
 
 		// 1. Retartos 2. mayor numero de horas 3. menor numero de horas
 
-		// List<ControlDiarioAlertaDto> controlRetardos = cdi.convertEntityHoraLlegada(mes, year, diaI, diaF);
-		// List<ResumenMensual> resumenesR = rm.ResumenEntity(1);
-		// System.out.println(resumenesR.size());
-		// System.out.println(controlRetardos.size());
+		 List<ControlDiarioAlertaDto> controlRetardos = cdi.convertEntityHoraLlegada(mes, year, diaI, diaF);
+		 List<ResumenMensual> resumenesR = rm.ResumenEntity(1);
+		 System.out.println(resumenesR.size());
+		 System.out.println(controlRetardos.size());
 
 		// 2. llamado al metodo que me generara el archivo excel.
-		// retardos.reporteHoraEntrada(controlRetardos, resumenesR);
+		 retardos.reporteHoraEntrada(controlRetardos, resumenesR);
 
 		// ------------------------------------------------------------------------------------------------------------->
 
