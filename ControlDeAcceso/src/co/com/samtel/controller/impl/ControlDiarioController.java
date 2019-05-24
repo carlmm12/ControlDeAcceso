@@ -194,7 +194,8 @@ public class ControlDiarioController implements IControlDiarioController {
 
 		ControlDiarioAlertaDto controlDA = null;
 		for (ControlDiario controlDiario : controlD) {
-			if (controlDiario.getTiempo().getHours() >= prop.getHoraExtra() && controlDiario.getTiempo().getMinutes() > prop.getMinutosExtra() ) {
+			if (controlDiario.getTiempo().getHours() >= prop.getHoraExtra()
+					&& controlDiario.getTiempo().getMinutes() > prop.getMinutosExtra()) {
 				alerta = "EL USUARIO COLABORO CON MAS DE LAS 9 HORAS ESTABLECIDAS ";
 
 				// se carga el DTO solo si el usuario colaboro con mas de 9 horas
@@ -203,7 +204,6 @@ public class ControlDiarioController implements IControlDiarioController {
 						controlDiario.getEntrada().toString(), controlDiario.getSalida().toString(),
 						controlDiario.getTiempo().toString(), alerta);
 
-				
 				// Se agrega a la lista de controlDiarioalertaDTO para returnarlo para generar
 				// el reporte
 				controlAlertas.add(controlDA);
@@ -232,8 +232,10 @@ public class ControlDiarioController implements IControlDiarioController {
 
 		ControlDiarioAlertaDto controlDA = null;
 		for (ControlDiario controlDiario : controlD) {
-			if (controlDiario.getEntrada().getHours() >= prop.getHoraEntrada() && controlDiario.getEntrada().getMinutes() > prop.getMinutosEntrada()) {
-				alerta = "LA HORA DE ENTRADA ES MAYOR A LAS " + prop.getHoraEntrada() +":"+ prop.getMinutosEntrada() + " AM";
+			if (controlDiario.getEntrada().getHours() >= prop.getHoraEntrada()
+					&& controlDiario.getEntrada().getMinutes() > prop.getMinutosEntrada()) {
+				alerta = "LA HORA DE ENTRADA ES MAYOR A LAS " + prop.getHoraEntrada() + ":" + prop.getMinutosEntrada()
+						+ " AM";
 
 				// se carga el DTO solo si el usuario llego tarde
 				controlDA = new ControlDiarioAlertaDto(controlDiario.getFecha().toString(),
@@ -241,7 +243,6 @@ public class ControlDiarioController implements IControlDiarioController {
 						controlDiario.getEntrada().toString(), controlDiario.getSalida().toString(),
 						controlDiario.getTiempo().toString(), alerta);
 
-				
 				// Se agrega a la lista de controlDiarioalertaDTO para returnarlo para generar
 				// el reporte
 				controlAlertas.add(controlDA);

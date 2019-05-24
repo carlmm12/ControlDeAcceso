@@ -9,12 +9,14 @@ import java.util.Properties;
 public class ListenProperties {
 
 	private static Properties prop = null;
-	private int year = 2019;
+	private int year;
 	private int horasLaboradas;
 	private int horaEntrada;
 	private int minutosEntrada;
 	private int horaExtra;
 	private int minutosExtra;
+	private String rutaFiles;
+	private String nameFolder;
 
 	public ListenProperties() {
 		
@@ -63,4 +65,17 @@ public class ListenProperties {
 		return minutosExtra;
 	}
 
+	public String getRutaFiles() {
+		this.rutaFiles  = getProperties().getProperty("rutaFiles");
+		return rutaFiles;
+	}
+
+	public String getNameFolder() {
+		this.nameFolder  = getProperties().getProperty("nameFolder");
+		return nameFolder;
+	}
+	
+	
+
+	
 }

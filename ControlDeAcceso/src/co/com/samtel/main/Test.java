@@ -34,6 +34,8 @@ public class Test {
     
 	public static void main(String[] args)  {
 		
+		
+		
 	    int mes = 4;
 		int year = 2019;
 		int diaI = 1;
@@ -44,7 +46,12 @@ public class Test {
 		// METODO QUE ME LEE EL ARCHIVO CSV Y ME REGISTRA LOS DATOS EN LA TABLA
 		// TBLCONTROL_ACCESOS TAL COMO VIENE DESDE EL ARCHIVO
 
-		// cac.CSVReader();
+		
+		
+		// TRAER EL ARCHIVO CSV DE UN ORIGEN X A UN ORIGEN ESPECIFICO / DOCUMENTOS
+		
+		 cac.CSVReader();
+		 
 		// --------------------------------------------------------------------------------------------------------->
 
 		// --------------------------------------------------------------------------------------------------------
@@ -125,13 +132,13 @@ public class Test {
 
 		// 1. Retartos 2. mayor numero de horas 3. menor numero de horas
 
-		 List<ControlDiarioAlertaDto> controlRetardos = cdi.convertEntityHoraLlegada(mes, year, diaI, diaF);
-		 List<ResumenMensual> resumenesR = rm.ResumenEntity(1);
-		 System.out.println(resumenesR.size());
-		 System.out.println(controlRetardos.size());
+		// List<ControlDiarioAlertaDto> controlRetardos = cdi.convertEntityHoraLlegada(mes, year, diaI, diaF);
+		// List<ResumenMensual> resumenesR = rm.ResumenEntity(1);
+		// System.out.println(resumenesR.size());
+		// System.out.println(controlRetardos.size());
 
 		// 2. llamado al metodo que me generara el archivo excel.
-		 retardos.reporteHoraEntrada(controlRetardos, resumenesR);
+		// retardos.reporteHoraEntrada(controlRetardos, resumenesR);
 
 		// ------------------------------------------------------------------------------------------------------------->
 

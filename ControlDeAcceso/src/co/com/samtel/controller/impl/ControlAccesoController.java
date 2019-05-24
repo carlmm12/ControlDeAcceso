@@ -58,6 +58,10 @@ public class ControlAccesoController implements IControlAccessoController {
 	@Override
 	public Boolean CSVReader() {
 
+		
+		// ELIMINAR RUTAS ABSOLUTA
+		
+		
 		String csvFile = "C:\\Users\\GCOCOL0231\\eclipse-workspace\\ControlDeAcceso\\files\\controlAcceso.csv";
 		// String csvFile = "C:\\csv\\controlAcceso.csv";
 		char coma = ';';
