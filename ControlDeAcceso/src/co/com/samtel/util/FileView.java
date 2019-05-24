@@ -10,6 +10,8 @@ import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import co.com.samtel.properties.ListenProperties;
 
 public class FileView {
@@ -17,8 +19,8 @@ public class FileView {
 	private String[] f = new String[2];
 	private JFileChooser chooser = new JFileChooser();
 	private static String fileName = "";
-	private static ListenProperties prop = new ListenProperties();
-
+    private static ListenProperties prop = new ListenProperties();
+   
 	/*
 	 * metodo para copiar el archivo a la carpeta de destino
 	 */
@@ -28,6 +30,7 @@ public class FileView {
 		System.out.println(urlS);
 		
 		System.out.println(urlD);
+		
 	
 		if (urlS != null && urlD != null) {
 			// System.out.println("paso correctamente");

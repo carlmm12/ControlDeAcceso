@@ -5,8 +5,10 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import co.com.samtel.properties.ListenProperties;
+
 public class folderVerify {
-	
+	private static ListenProperties prop = new ListenProperties();
 
 
 /*
@@ -15,7 +17,7 @@ public class folderVerify {
 
 public static void createDirec() {
 	// System.out.println(new File(".").getAbsolutePath());
-	String desktopPath = System.getProperty("user.home") + "/Desktop";
+	String desktopPath = System.getProperty("user.home") + prop.getRutaFiles();
 
 	desktopPath = desktopPath.replace("\\", "/");
 	File folder = new File(desktopPath + "/Reportes");
@@ -41,7 +43,7 @@ public  static String createFileName(String nombre) {
 	System.out.println(convertido);
 
 	String nameFile = "ControlAcceso_" + nombre + "_" + convertido + ".xlsx";
-	String rute = System.getProperty("user.home") + "/Desktop/Reportes/";
+	String rute = System.getProperty("user.home") + prop.getRutaFiles() + "/Reportes/";
 	rute = rute.replace("\\", "/");
 	String foldR = rute + nameFile;
 	System.out.println(rute);
@@ -49,5 +51,23 @@ public  static String createFileName(String nombre) {
 	return foldR;
 }
 
+
+/*
+ * METODO QUE ME GENERA LA RUTA Y EL NOMBRE DEL ARCHIVO DEL CONTROL DE ACCESO QUE PROVIENE DE LA MAQUINA BIOMETRICA
+ * 
+ * 
+ */
+
+public  static String createRoutFile(String name_file) {
+	
+
+	
+	String rutePath = System.getProperty("user.home") + prop.getRutaFiles();
+	rutePath = rutePath.replace("\\", "/");
+	File folder = new File(rutePath + prop.getNameFolder());
+	String file = folder.getAbsolutePath() + "/" + name_file;
+	System.out.println(file);
+	return file;
+}
 
 }

@@ -1,5 +1,6 @@
 package co.com.samtel.controller.impl;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Timestamp;
@@ -17,14 +18,17 @@ import co.com.samtel.controller.IControlAccessoController;
 import co.com.samtel.entities.ControlAcceso;
 import co.com.samtel.entities.ControlAccesoPK;
 import co.com.samtel.entities.Usuario;
+import co.com.samtel.properties.ListenProperties;
 import co.com.samtel.service.IServiceControlAcceso;
 import co.com.samtel.service.IServiceUsuario;
 import co.com.samtel.util.BeanUtil;
+import co.com.samtel.util.folderVerify;
 
 @Controller
 public class ControlAccesoController implements IControlAccessoController {
 
 	private IServiceControlAcceso conAccService;
+	private static ListenProperties prop = new ListenProperties();
 
 	/*
 	 * Este metodo me permite generar usar el servicio de controlAcceso.
@@ -56,14 +60,15 @@ public class ControlAccesoController implements IControlAccessoController {
 	 * Este metodo me permite cargar desde un acrhivo csv la data a la base de datos
 	 */
 	@Override
-	public Boolean CSVReader() {
+	public Boolean CSVReader(String name_file) {
 
+	
+        
+		String csvFile = folderVerify.createRoutFile(name_file);
+		//String csvFile = "C:\\Users\\GCOCOL0231\\eclipse-workspace\\ControlDeAcceso\\files\\controlAcceso.csv";
+		System.out.println(csvFile);
 		
-		// ELIMINAR RUTAS ABSOLUTA
 		
-		
-		String csvFile = "C:\\Users\\GCOCOL0231\\eclipse-workspace\\ControlDeAcceso\\files\\controlAcceso.csv";
-		// String csvFile = "C:\\csv\\controlAcceso.csv";
 		char coma = ';';
 
 		// convertir fecha y hora
@@ -78,12 +83,14 @@ public class ControlAccesoController implements IControlAccessoController {
 			while ((line = reader.readNext()) != null) {
 				Date date = formatter.parse(line[5]);
 				// ControlAcceso user = new ControlAcceso(id, ya, ya, name, tmno);
-				ControlAcceso cAcceso = new ControlAcceso(new ControlAccesoPK(new Timestamp(date.getTime()), Integer.parseInt(line[1])),
+				ControlAcceso cAcceso = new ControlAcceso(
+						new ControlAccesoPK(new Timestamp(date.getTime()), Integer.parseInt(line[1])),
 						Integer.parseInt(line[3]), Integer.parseInt(line[4]), line[2], Integer.parseInt(line[0]));
 				// System.out.println(cAcceso.toString() + cAcceso.getId().toString());
 				create(cAcceso);
 				// System.out.println(line[0] + line[1] + line[2] + line[3] + line[4] +
 				// line[5]);
+				return true;
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -92,7 +99,7 @@ public class ControlAccesoController implements IControlAccessoController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return true;
+		return false;
 	}
 
 }

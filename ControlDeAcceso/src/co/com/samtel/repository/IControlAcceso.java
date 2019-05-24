@@ -68,5 +68,4 @@ public interface IControlAcceso  extends JpaRepository<ControlAcceso, Integer> {
 	
 	
 	
-	
 }

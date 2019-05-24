@@ -80,5 +80,28 @@ public interface IcontrolAcessoOrd  extends JpaRepository<ControlAccesosOrd, Int
 	@Query(value="SELECT   DATE(fecha) AS fechas FROM tblcontrol_accesos_ord  WHERE DAY(DATE(fecha))  BETWEEN  :diaI AND  :diaF  GROUP BY fechas;", nativeQuery = true )
 	public List<String> controlDiasR1( @Param("diaI") int diaI ,@Param("diaF") int diaF );
 	
+	/*
+	 * Metdo que trae todos los años que estan en la tabla tblCOntrolAccesoOrd
+	 */
+	
+	@Query(value="SELECT YEAR(DATE(fecha)) AS anio FROM tblcontrol_accesos_ord GROUP BY anio", nativeQuery = true )
+	public List<Integer> findYear();
+	
+	/*
+	 * Metodo que me trae todos los meses que estan registrado en la tblControlAccesoOrd de acuerdo al año
+	 */
+	
+	@Query(value="SELECT MONTH(DATE(fecha)) AS mes FROM tblcontrol_accesos_ord WHERE YEAR(DATE(fecha)) = :year  GROUP BY mes", nativeQuery = true )
+	public List<Integer> findMes(@Param("year") int year );
+	
+	
+	/*
+	 * Metodo que me trea todos los dias que estan registrados en la tblcontrolaccesoOrd de acuerdo al año y el mes especificado
+	 */
+	
+	@Query(value="SELECT DAY(DATE(fecha)) AS dia FROM tblcontrol_accesos_ord WHERE YEAR(DATE(fecha)) = :year AND  MONTH(DATE(fecha)) = :mes   GROUP BY dia; ", nativeQuery = true )
+	public List<Integer> findDay(@Param("year") int year, @Param("mes") int mes  );
+	
+	
 	
 }

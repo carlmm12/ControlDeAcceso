@@ -195,4 +195,22 @@ public class ControlAccesoOrdImpl implements IServiceControlAccesoOrd {
 		// TODO Auto-generated method stub
 		return controlAccesoOrd.controlDiasR1(diaI, diaF);
 	}
+
+	@Override
+	public List<Integer> findYear() {
+		// TODO Auto-generated method stub
+		return controlAccesoOrd.findYear();
+	}
+
+	@Override
+	public List<Integer> findMes(int year) {
+		// TODO Auto-generated method stub
+		return controlAccesoOrd.findMes(year);
+	}
+
+	@Override
+	public List<Integer> findDay(int year, int mes) {
+		// TODO Auto-generated method stub
+		return controlAccesoOrd.findDay(year, mes);
+	}
 }

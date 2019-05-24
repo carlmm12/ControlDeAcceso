@@ -6,7 +6,7 @@ import co.com.samtel.service.IServiceControlAcceso;
 public interface IControlAccessoController {
 	
 	IServiceControlAcceso getControlAccesoService();
-    Boolean CSVReader();
+    Boolean CSVReader(String name_file);
     void create(ControlAcceso entity);
     
 }

@@ -21,25 +21,25 @@ import co.com.samtel.util.MayorHorasLaboradas;
 
 public class Test {
 
-	public static IUserController uc = new UserController();
-	public static IControlAccessoController cac = new ControlAccesoController();
-	public static IControlAccesoOrdController caoc = new ControlAccesoOrdController();
-	public static IControlDiarioController cdi = new ControlDiarioController();
-	public static MenorHorasLaboradas menorHL = new MenorHorasLaboradas();
-	public static MayorHorasLaboradas mayorHL = new MayorHorasLaboradas();
-	public static MayorHoraEntrada retardos = new MayorHoraEntrada();
-	public static IResumenMensualController rm = new ResumenMensualController();
-    public static ListenProperties prop = new ListenProperties();
+//	public static IUserController uc = new UserController();
+//	public static IControlAccessoController cac = new ControlAccesoController();
+//	public static IControlAccesoOrdController caoc = new ControlAccesoOrdController();
+//	public static IControlDiarioController cdi = new ControlDiarioController();
+//	public static MenorHorasLaboradas menorHL = new MenorHorasLaboradas();
+//	public static MayorHorasLaboradas mayorHL = new MayorHorasLaboradas();
+//	public static MayorHoraEntrada retardos = new MayorHoraEntrada();
+//	public static IResumenMensualController rm = new ResumenMensualController();
+//    public static ListenProperties prop = new ListenProperties();
     
     
-	public static void main(String[] args)  {
-		
-		
-		
-	    int mes = 4;
-		int year = 2019;
-		int diaI = 1;
-		int diaF = 2;
+//	public static void main(String[] args)  {
+//		
+//		
+//		
+//	    int mes = 4;
+//		int year = 2019;
+//		int diaI = 1;
+//		int diaF = 2;
 
 		// --------------------------------------------------------------------------------------------------------
 
@@ -50,7 +50,7 @@ public class Test {
 		
 		// TRAER EL ARCHIVO CSV DE UN ORIGEN X A UN ORIGEN ESPECIFICO / DOCUMENTOS
 		
-		 cac.CSVReader();
+		// cac.CSVReader();
 		 
 		// --------------------------------------------------------------------------------------------------------->
 
@@ -70,6 +70,8 @@ public class Test {
 		// cdi.alarmaControlDiario();
 		// --------------------------------------------------------------------------------------------------------->
 
+		 
+		 
 		// --------------------------------------------------------------------------------------------------------
 
 		// METODO QUE HACE EL RESUMEN MENSUAL DE LAS ALERTAS DE ACUERDO A EL MES, AÑO,
@@ -132,16 +134,16 @@ public class Test {
 
 		// 1. Retartos 2. mayor numero de horas 3. menor numero de horas
 
-		// List<ControlDiarioAlertaDto> controlRetardos = cdi.convertEntityHoraLlegada(mes, year, diaI, diaF);
-		// List<ResumenMensual> resumenesR = rm.ResumenEntity(1);
-		// System.out.println(resumenesR.size());
-		// System.out.println(controlRetardos.size());
-
-		// 2. llamado al metodo que me generara el archivo excel.
-		// retardos.reporteHoraEntrada(controlRetardos, resumenesR);
-
-		// ------------------------------------------------------------------------------------------------------------->
-
-	}
+//		 List<ControlDiarioAlertaDto> controlRetardos = cdi.convertEntityHoraLlegada(mes, year, diaI, diaF);
+//		 List<ResumenMensual> resumenesR = rm.ResumenEntity(1);
+//		 System.out.println(resumenesR.size());
+//		 System.out.println(controlRetardos.size());
+//
+//		// 2. llamado al metodo que me generara el archivo excel.
+//		 retardos.reporteHoraEntrada(controlRetardos, resumenesR);
+//
+//		// ------------------------------------------------------------------------------------------------------------->
+//
+//	}
 
 }
