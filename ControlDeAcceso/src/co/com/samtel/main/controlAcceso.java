@@ -77,6 +77,12 @@ public class controlAcceso extends JFrame {
 	 * Create the frame.
 	 */
 	public controlAcceso() {
+		addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent arg0) {
+				txtAlert.setText("");
+			}
+		});
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 449, 312);
@@ -134,14 +140,18 @@ public class controlAcceso extends JFrame {
 								if (resp == true) {
 
 									// enviamos un mensaje para indicar que el archivo se subio de manera correcta
+									
 									getTxtAlert().setText("El archivo se cargo de manera Exitosa");
+									getTxtAlert().setForeground(Color.green);
 
 								} else {
 									// enviamos un mensaje para indicar que el archivo se subio de manera correcta
 									getTxtAlert().setText("Error de archivo, verifique que es el correcto");
+									getTxtAlert().setForeground(Color.red);
 								}
 
 							} catch (Exception e2) {
+								getTxtAlert().setForeground(Color.red);
 								getTxtAlert().setText("Error registrando en la base de datos");
 							}
 
@@ -153,19 +163,22 @@ public class controlAcceso extends JFrame {
 							txtRuta.setText("");
 							// volvemos nulo a el filechooser para que no se vuelva a cargar.
 							fc = null;
-							// enviamos un mensaje para indicar que el archivo fallo al subirse
+							// enviamos un mensaje para indicar que el archivo fallo al subirs
 							getTxtAlert().setText("Fallo al subir el archivo");
+							getTxtAlert().setForeground(Color.red);
 							System.out.println("el archivo no se cargo, verifica cual es el problema");
 						}
 
 					} else {
 						txtRuta.setText("");
 						getTxtAlert().setText("Seleccione un archivo");
+						getTxtAlert().setForeground(Color.red);
 					}
 				} catch (NullPointerException e2) {
 					System.out.println(e2);
 					txtRuta.setText("");
 					getTxtAlert().setText("Seleccione un archivo");
+					getTxtAlert().setForeground(Color.red);
 				}
 
 			}
@@ -185,6 +198,12 @@ public class controlAcceso extends JFrame {
 		tabbedPane.addTab("Reportes", null, pnlReportes, null);
 
 		JComboBox cbxTipoReporte = new JComboBox();
+		cbxTipoReporte.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent arg0) {
+				txtAlert.setText("");
+			}
+		});
 		cbxTipoReporte.setModel(new DefaultComboBoxModel(new String[] { "Seleccione el tipo reporte ...", "Retardos\t",
 				"Menor Horas Trabajadas", "Mayor Horas Trabajadas" }));
 
@@ -194,7 +213,9 @@ public class controlAcceso extends JFrame {
 		cbxAnio.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
+				// removemos los años disponibles de acuerdo a la busqueda en la base de datos
 				cbxAnio.removeAllItems();
+				// llamado al metodo para buscar todos los años disponibles
 				List<Integer> data = vc.findbyRequer(0, 0, 1);
 				for (int i = 0; i < data.size(); i++) {
 					cbxAnio.addItem(data.get(i));
@@ -203,6 +224,8 @@ public class controlAcceso extends JFrame {
 
 			@Override
 			public void focusLost(FocusEvent e) {
+				// asignamos a la variable del año el valor que se le selecciono  en el combo box
+				
 				year = Integer.parseInt(String.valueOf(cbxAnio.getSelectedItem()));
 				System.out.println(year);
 			}
@@ -212,7 +235,10 @@ public class controlAcceso extends JFrame {
 		cbxMes.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
+				// remueve los item para volver a asignarlso de acuerdo al año
 				cbxMes.removeAllItems();
+				
+				// llamamos al metodo que me `permitira traer todos los meses disponibles que estan registrados en la bse de datos control acceso para buscar el mes
 				List<Integer> data = vc.findbyRequer(year, 0, 2);
 				for (int i = 0; i < data.size(); i++) {
 					cbxMes.addItem(data.get(i));
@@ -221,6 +247,8 @@ public class controlAcceso extends JFrame {
 
 			@Override
 			public void focusLost(FocusEvent e) {
+				
+				// se le asigna el valor a la variable mes con el valor seleccionado en el campo del mes
 				mes = Integer.parseInt(String.valueOf(cbxMes.getSelectedItem()));
 				System.out.println(mes);
 			}
@@ -235,7 +263,7 @@ public class controlAcceso extends JFrame {
 		cbxDesde.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent arg0) {
-
+                  // muestra los dias en los que se registro el control de acceso biometrico
 				diaI = Integer.parseInt(String.valueOf(cbxDesde.getSelectedItem()));
 				System.out.println(diaI);
 			}
@@ -289,14 +317,17 @@ public class controlAcceso extends JFrame {
                         
 						vc.AlertaRetardos(mes,year, diaI, diaF);
 						getTxtAlert().setText("Reporte generado correctamente");
+						getTxtAlert().setForeground(Color.black);
 						break;
 					case 2:
 						vc.AlertaMenorHorasLaboradas( mes,year, diaI, diaF);
 						getTxtAlert().setText("Reporte generado correctamente");
+						getTxtAlert().setForeground(Color.black);
 						break;
 					case 3:
 						vc.AlertaMayorHorasLaboradas(mes,year, diaI, diaF);
 						getTxtAlert().setText("Reporte generado correctamente");
+						getTxtAlert().setForeground(Color.black);
 						break;
 
 					default:
@@ -306,6 +337,7 @@ public class controlAcceso extends JFrame {
 				}else {
 					
 					getTxtAlert().setText("Ingrese los parametros de busqueda");
+					getTxtAlert().setForeground(Color.red);
 				}
 				
 				cbxDesde.removeAllItems();
@@ -337,6 +369,7 @@ public class controlAcceso extends JFrame {
 				year = 0;
 				diaI = 0;
 				diaF = 0;
+				getTxtAlert().setText("");
 
 			}
 		});

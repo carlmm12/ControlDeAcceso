@@ -21,18 +21,18 @@ import co.com.samtel.util.MayorHorasLaboradas;
 
 public class Test {
 
-//	public static IUserController uc = new UserController();
-//	public static IControlAccessoController cac = new ControlAccesoController();
-//	public static IControlAccesoOrdController caoc = new ControlAccesoOrdController();
-//	public static IControlDiarioController cdi = new ControlDiarioController();
-//	public static MenorHorasLaboradas menorHL = new MenorHorasLaboradas();
-//	public static MayorHorasLaboradas mayorHL = new MayorHorasLaboradas();
-//	public static MayorHoraEntrada retardos = new MayorHoraEntrada();
-//	public static IResumenMensualController rm = new ResumenMensualController();
-//    public static ListenProperties prop = new ListenProperties();
+	public static IUserController uc = new UserController();
+	public static IControlAccessoController cac = new ControlAccesoController();
+	public static IControlAccesoOrdController caoc = new ControlAccesoOrdController();
+	public static IControlDiarioController cdi = new ControlDiarioController();
+	public static MenorHorasLaboradas menorHL = new MenorHorasLaboradas();
+	public static MayorHorasLaboradas mayorHL = new MayorHorasLaboradas();
+	public static MayorHoraEntrada retardos = new MayorHoraEntrada();
+	public static IResumenMensualController rm = new ResumenMensualController();
+    public static ListenProperties prop = new ListenProperties();
     
     
-//	public static void main(String[] args)  {
+	public static void main(String[] args)  {
 //		
 //		
 //		
@@ -50,7 +50,7 @@ public class Test {
 		
 		// TRAER EL ARCHIVO CSV DE UN ORIGEN X A UN ORIGEN ESPECIFICO / DOCUMENTOS
 		
-		// cac.CSVReader();
+		 cac.CSVReader("mayo.csv");
 		 
 		// --------------------------------------------------------------------------------------------------------->
 
@@ -61,8 +61,7 @@ public class Test {
 
 		// caoc.register();
 
-		// -------------------------------------------------------------------------------------------------------->
-
+		// --------------------------------------------------------------------------------------------------------
 		// -------------------------------------------------------------------------------------------------------
 		// METODO QUE ME PERMITE REGISTRAR EL LA TABLA CONTROL DIARIO TOMADO COMO
 		// REFERENCIA A LA ALERTA 1. CONTROL DIARIO POR USUARIO.
@@ -144,6 +143,6 @@ public class Test {
 //
 //		// ------------------------------------------------------------------------------------------------------------->
 //
-//	}
+	}
 
 }

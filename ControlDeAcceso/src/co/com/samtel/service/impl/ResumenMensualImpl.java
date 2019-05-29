@@ -1,5 +1,6 @@
 package co.com.samtel.service.impl;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -82,13 +83,14 @@ public class ResumenMensualImpl implements IServiceResumenMensual {
 
 	@Override
 	public void updateEntity(ResumenMensual entity) {
-		
-		String mes =  entity.getFecha().toLocaleString();
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(entity.getFecha());
+		int mes =  calendar.MONTH;
 		System.out.println(mes);
 		System.out.println("esto trae la consulta por el mes " + mes);
 		try {
-			rmen.updateEntity(entity.getNroAlertas(), entity.getPorcentajeAlertas(), entity.getId().getCodigo(), 4, entity.getId().getTipoAlerta() );
-			
+			rmen.updateEntity(entity.getNroAlertas(), entity.getPorcentajeAlertas(), entity.getId().getCodigo(), 5, entity.getId().getTipoAlerta() );
+			System.out.println(entity.toString());
 		} catch (Exception e) {
 			System.out.println("No se pudo  actualizar los datos");
 		}

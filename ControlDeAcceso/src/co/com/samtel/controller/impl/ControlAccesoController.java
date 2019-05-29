@@ -64,8 +64,10 @@ public class ControlAccesoController implements IControlAccessoController {
 
 	
         
-		String csvFile = folderVerify.createRoutFile(name_file);
+		 String csvFile = folderVerify.createRoutFile(name_file);
 		//String csvFile = "C:\\Users\\GCOCOL0231\\eclipse-workspace\\ControlDeAcceso\\files\\controlAcceso.csv";
+		// String csvFile = "C:\\Users\\00000\\Documents\\mayo.csv";
+		//String csvFile = "C:\\Users\\00000\\Documents\\ControlDeAcceso\\ControlDeAcceso\\files\\controlAcceso.csv";
 		System.out.println(csvFile);
 		
 		
@@ -81,17 +83,20 @@ public class ControlAccesoController implements IControlAccessoController {
 			System.out.println(reader.toString());
 			String[] line;
 			while ((line = reader.readNext()) != null) {
+				System.out.println("Entro");
 				Date date = formatter.parse(line[5]);
 				// ControlAcceso user = new ControlAcceso(id, ya, ya, name, tmno);
 				ControlAcceso cAcceso = new ControlAcceso(
 						new ControlAccesoPK(new Timestamp(date.getTime()), Integer.parseInt(line[1])),
 						Integer.parseInt(line[3]), Integer.parseInt(line[4]), line[2], Integer.parseInt(line[0]));
-				// System.out.println(cAcceso.toString() + cAcceso.getId().toString());
+				 System.out.println(cAcceso.toString() + cAcceso.getId().toString());
 				create(cAcceso);
 				// System.out.println(line[0] + line[1] + line[2] + line[3] + line[4] +
 				// line[5]);
-				return true;
+				
 			}
+			
+			return true;
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.out.println(e);

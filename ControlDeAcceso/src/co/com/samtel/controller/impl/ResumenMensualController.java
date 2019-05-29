@@ -9,6 +9,7 @@ import co.com.samtel.dto.ControlDiarioDto;
 import co.com.samtel.entities.CodigoUsuario;
 import co.com.samtel.entities.ResumenMensual;
 import co.com.samtel.entities.ResumenMensualPK;
+import co.com.samtel.properties.ListenProperties;
 import co.com.samtel.service.IServiceCodigoUsuario;
 import co.com.samtel.service.IServiceControlAccesoOrd;
 import co.com.samtel.service.IServiceResumenMensual;
@@ -20,6 +21,7 @@ public class ResumenMensualController implements IResumenMensualController {
 	IServiceResumenMensual resMensualService;
 	private IServiceControlAccesoOrd conAccOrdService;
 	private IServiceCodigoUsuario codUserService;
+	private static ListenProperties prop = new ListenProperties();
 
 	@Override
 	public IServiceResumenMensual getResumenMensualServices() {
@@ -63,7 +65,7 @@ public class ResumenMensualController implements IResumenMensualController {
 
 		// se hace un parse de la fecha que viene en formato COT para que aparezca en forma UTC separado por guiones
 		LocalDate fec = convertDate.converToDat(fechasDia);
-		
+		System.out.println("---------------  ESTE ES EL INICIO DEL REGISTRO DE RESUMEN MENSUAL --------------");
         
 		int mes = fec.getMonthValue();
 		int year = fec.getYear();
@@ -79,7 +81,8 @@ public class ResumenMensualController implements IResumenMensualController {
 		
 		// si entra al metodo se le agrega uno más para poder registrar el alerta. 
 		nroAlertas = nroAlertas + 1;
-
+		System.out.println(nroAlertas);
+		
 		// Se realiza el porcentaje de acuerdo al numero de días y como 100 % el total de diás 
 		porcentajeAlertas = (nroAlertas* 100) / totaldias ;
 
@@ -92,7 +95,10 @@ public class ResumenMensualController implements IResumenMensualController {
 				codigoUser.getTblusuario().getNombre());
 
 		System.out.println(resMen.toString());
-
+        
+		
+		System.out.println("---------------  ESTE ES EL FINAL DEL REGISTRO DE RESUMEN MENSUAL --------------");
+		
 		// se verifica que el numero de alertas que nos trae la base de datos de ser
 		// cero lo insertamos debido
 		// a que no esta registrado ningun dato aparente en la base de datos y por el
@@ -102,10 +108,13 @@ public class ResumenMensualController implements IResumenMensualController {
 		if (nroAlertas == 1) {
 
 			getResumenMensualServices().save(resMen);
-
+           System.out.println("entro a registrarse");
 		} else {
 
+			
+			
 			getResumenMensualServices().updateEntity(resMen);
+			System.out.println("entro a actualizarce");
 
 		}
 
@@ -167,17 +176,20 @@ public class ResumenMensualController implements IResumenMensualController {
 					// se crea el reporte de acuerdo al tipo de alerta (mayor horas laboradas)(menor
 					// horas laboradas) (hora de ingreso)
 
-					if (controlDto.getEntrada().getHours() >= 8 && controlDto.getEntrada().getMinutes() > 15) {
+					if (controlDto.getEntrada().getHours() >= prop.getHoraEntrada() && controlDto.getEntrada().getMinutes() > prop.getMinutosEntrada()) {
 
 						System.out.println("USUARIOS CON RETARDOS");
 						addUpdate(codUser, fechasDia, 1, totaldias, codigoUser);
-
-					} else if (controlDto.getTiempo().getHours() < 9) {
+					} 
+					
+					if (controlDto.getTiempo().getHours() < prop.getHorasLaboradas()) {
 
 						System.out.println("USUARIOS CON MENOR HORAS TRABAJADAS");
 						addUpdate(codUser, fechasDia, 2, totaldias, codigoUser);
 
-					} else if (controlDto.getTiempo().getHours() >= 9) {
+					} 
+					
+					if (controlDto.getTiempo().getHours() >= prop.getHoraExtra() &&  controlDto.getTiempo().getMinutes() >= prop.getMinutosExtra()) {
 
 						System.out.println("USUARIOS CON MAYOR HORAS TRABAJADAS");
 
