@@ -1,8 +1,11 @@
 package co.com.samtel.service.impl;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +14,7 @@ import org.springframework.stereotype.Service;
 import co.com.samtel.entities.ResumenMensual;
 import co.com.samtel.repository.IResumenMensual;
 import co.com.samtel.service.IServiceResumenMensual;
+import co.com.samtel.util.convertDate;
 
 @Service("ResumenMensualBean")
 public class ResumenMensualImpl implements IServiceResumenMensual {
@@ -72,8 +76,8 @@ public class ResumenMensualImpl implements IServiceResumenMensual {
 
 	@Override
 	public Integer findnumAlertas(int codigo, int mes, int year, int tipoAlerta) {
-		Integer dato = rmen.findnumAlertas(codigo, mes, year , tipoAlerta);
-       System.out.println("ESTO ES LO QUE TRAE LA CONSULTA" + dato);
+		Integer dato = rmen.findnumAlertas(codigo, mes, year, tipoAlerta);
+		System.out.println("ESTO ES LO QUE TRAE LA CONSULTA" + dato);
 		if (dato == null || dato == 0) {
 			dato = 0;
 		}
@@ -83,18 +87,25 @@ public class ResumenMensualImpl implements IServiceResumenMensual {
 
 	@Override
 	public void updateEntity(ResumenMensual entity) {
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(entity.getFecha());
-		int mes =  calendar.MONTH;
-		System.out.println(mes);
-		System.out.println("esto trae la consulta por el mes " + mes);
+
+		
 		try {
-			rmen.updateEntity(entity.getNroAlertas(), entity.getPorcentajeAlertas(), entity.getId().getCodigo(), 5, entity.getId().getTipoAlerta() );
+			
+			// CONVIERTO LA FECHA DE TIPO COT A TIPO UTC CON FORMATO "YYYY-MM-DD" Y EXTRAIGO EL MES PARA LA ACTUALIZACIÓN
+			LocalDate ld = convertDate.converDateCot(entity.getFecha());
+			System.out.println("Este es el mes de la consulta: " +ld.getMonthValue() );
+			// CREO UNA VARIABLE PARA ASIGNAR EL MES
+			int mes = ld.getMonthValue();
+			
+			// ACTUALIZADO LA ENTIDAD DE LA BASE DE DATOS
+			rmen.updateEntity(entity.getNroAlertas(), entity.getPorcentajeAlertas(), entity.getId().getCodigo(), mes,
+					entity.getId().getTipoAlerta());
 			System.out.println(entity.toString());
 		} catch (Exception e) {
+			
 			System.out.println("No se pudo  actualizar los datos");
 		}
-		
+
 	}
 
 	@Override
@@ -104,15 +115,13 @@ public class ResumenMensualImpl implements IServiceResumenMensual {
 		} catch (Exception e) {
 			System.out.println("Error al intenta eliminar los registros con el año:" + year + " y el mes: " + mes);
 		}
-		
+
 	}
 
 	@Override
 	public List<ResumenMensual> findbyAlertType(int tipoAlerta) {
-		
+
 		return rmen.findbyAlertType(tipoAlerta);
 	}
-
-
 
 }

@@ -20,7 +20,7 @@ public class convertDate {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		Date converDate;
 		try {
-			converDate =  formatter.parse(date);
+			converDate = formatter.parse(date);
 			return converDate;
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
@@ -31,10 +31,18 @@ public class convertDate {
 
 	public static LocalDate converToDat(String date) {
 
-		DateTimeFormatter f = DateTimeFormatter.ofPattern( "yyyy-MM-dd" ) ;
-		LocalDate ldt = LocalDate.parse( date , f ) ;
+		DateTimeFormatter f = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		LocalDate ldt = LocalDate.parse(date, f);
 		System.out.println(ldt.getMonthValue());
-       return ldt;
+		return ldt;
+	}
+
+	public static LocalDate converDateCot(Date fecha) {
+		String input = fecha.toString();
+		DateTimeFormatter f = DateTimeFormatter.ofPattern("E MMM dd HH:mm:ss z uuuu").withLocale(Locale.US);
+		ZonedDateTime zdt = ZonedDateTime.parse(input, f);
+		LocalDate ld = zdt.toLocalDate();
+		return ld;
 	}
 
 }
